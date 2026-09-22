@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: JobSpot
+  datasource:
+    username: root
+    password: admin123
+    url: jdbc:mysql://localhost:3306/jobspot
