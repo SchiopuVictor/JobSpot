@@ -39,7 +39,6 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
