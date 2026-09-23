@@ -3,13 +3,17 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -29,19 +33,19 @@ public class User {
     @Column(name = "email")
     private String email;
 
-
     @Column(name = "password")
     private String password;
 
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "role")
-    private String role;
 
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "active")
     private Boolean active = false;
