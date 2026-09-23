@@ -22,7 +22,6 @@ public class UserMapper {
                 .lastName(request.getLastName())
                 .phone(request.getPhone())
                 .email(request.getEmail())
-                .createdAt(request.getCreatedAt())
                 .active(request.getActive())
                 .role(request.getRole())
                 .password(request.getPassword())

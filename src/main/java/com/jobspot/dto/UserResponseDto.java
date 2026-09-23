@@ -22,4 +22,5 @@ public class UserResponseDto {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
     private Boolean active;
+
 }
