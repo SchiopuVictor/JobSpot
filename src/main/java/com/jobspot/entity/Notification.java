@@ -3,13 +3,16 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "notification", schema = "jobspot")
 public class Notification {
@@ -29,6 +32,6 @@ public class Notification {
     private String message;
 
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDate createdAt;
 
 }
