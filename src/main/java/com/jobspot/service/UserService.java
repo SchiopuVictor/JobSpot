@@ -4,6 +4,7 @@ import com.jobspot.dto.UserRequestDto;
 import com.jobspot.entity.User;
 import com.jobspot.mapper.UserMapper;
 import com.jobspot.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,11 @@ import java.time.LocalDate;
 public class UserService {
     private final UserRepository userRepository;
 
+    @Transactional
     public User createUser(UserRequestDto request){
         User user = UserMapper.toEntity(request);
         user.setCreatedAt(LocalDate.now());
-        return user;
+        return userRepository.save(user);
     }
 
     public User getUser(Long id){
@@ -26,6 +28,7 @@ public class UserService {
 
     }
 
+    @Transactional
     public User updateUser(UserRequestDto request, Long id){
         User user = userRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("User not found!!"));
@@ -43,7 +46,7 @@ public class UserService {
 
     }
 
-
+    @Transactional
     public void deleteUser(Long id){
         userRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("User not found!!"));
