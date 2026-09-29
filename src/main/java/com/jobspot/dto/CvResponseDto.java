@@ -1,7 +1,6 @@
 package com.jobspot.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jobspot.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,16 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+@Builder
+public class CvResponseDto {
 
-    private String email;
-    private Role role;
+    private String userName;
+    private String fileName;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
-    private Boolean active;
-
 }

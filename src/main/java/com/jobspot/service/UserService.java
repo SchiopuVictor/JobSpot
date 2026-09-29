@@ -32,15 +32,11 @@ public class UserService {
     public User updateUser(UserRequestDto request, Long id){
         User user = userRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("User not found!!"));
-
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
         user.setCreatedAt(LocalDate.now());
         user.setActive(request.getActive());
         user.setRole(request.getRole());
         user.setPassword(request.getPassword());
-        user.setPhone(request.getPhone());
 
         return userRepository.save(user);
 

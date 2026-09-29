@@ -8,14 +8,12 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "application", schema = "jobspot")
-public class Application {
+@Table(name = "evaluation", schema = "jobspot")
+public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,21 +27,25 @@ public class Application {
     @JoinColumn(name = "internship_id")
     private Internship internship;
 
-    @Column(name = "cover_letter")
-    private String coverLetter;
+    @Column(name = "technical_skills")
+    private String technicalSkills;
 
-    @ManyToOne
-    @JoinColumn(name = "cv_id")
-    private Cv cv;
+    @Column(name = "communication")
+    private String communication;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "teamwork")
+    private String teamwork;
 
-    @Column(name = "applied_at")
-    private LocalDate appliedAt;
+    @Column(name = "responsibility")
+    private String responsibility;
 
-    @OneToMany
-    @JoinColumn(name = "application_id")
-    private Set<Interview> interviews = new LinkedHashSet<>();
+    @Column(name = "overall_rating")
+    private Integer overallRating;
+
+    @Column(name = "comment")
+    private String comment;
+
+    @Column(name = "created_at")
+    private LocalDate createdAt;
 
 }
