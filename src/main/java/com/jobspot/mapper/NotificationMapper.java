@@ -8,8 +8,6 @@ public class NotificationMapper {
 
     public static NotificationResponseDto toDto (Notification notification){
         return NotificationResponseDto.builder()
-                .userName(notification.getUser().getFirstName()+" " +
-                          notification.getUser().getLastName())
                 .createdAt(notification.getCreatedAt())
                 .title(notification.getTitle())
                 .message(notification.getMessage())

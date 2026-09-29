@@ -17,13 +17,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserRequestDto {
 
-    private String firstName;
-    private String lastName;
     @Email(message = "this bust be an email!!")
     private String email;
     @ValidateRole(message = "this field must be completed!!")
     private Role role;
-    private String phone;
     private String password;
     private Boolean active;
 }

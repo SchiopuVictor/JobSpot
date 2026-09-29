@@ -3,6 +3,7 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,8 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+
 @Table(name = "interview", schema = "jobspot")
 public class Interview {
     @Id
@@ -29,8 +32,9 @@ public class Interview {
     @Column(name = "time")
     private LocalTime time;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private Type type;
 
     @Column(name = "meeting_link")
     private String meetingLink;
@@ -38,7 +42,8 @@ public class Interview {
     @Column(name = "location")
     private String location;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
 }

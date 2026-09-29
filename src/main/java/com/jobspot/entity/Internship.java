@@ -40,8 +40,9 @@ public class Internship {
     @Column(name = "location")
     private String location;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private String type;
+    private InternshipType type;
 
     @Column(name = "duration")
     private Instant duration;
@@ -58,8 +59,9 @@ public class Internship {
     @Column(name = "created_at")
     private Instant createdAt;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private InternshipStatus status;
 
     @OneToMany(mappedBy = "internship")
     private Set<Application> applications = new LinkedHashSet<>();

@@ -3,14 +3,17 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "cv", schema = "jobspot")
 public class Cv {
     @Id
@@ -26,6 +29,6 @@ public class Cv {
     private String fileName;
 
     @Column(name = "uploaded_at")
-    private Instant uploadedAt;
+    private LocalDate uploadedAt;
 
 }
