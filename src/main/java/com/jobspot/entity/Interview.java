@@ -1,11 +1,7 @@
 package com.jobspot.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,7 +10,8 @@ import java.time.LocalTime;
 @Setter
 @Entity
 @AllArgsConstructor
-
+@NoArgsConstructor
+@Builder
 @Table(name = "interview", schema = "jobspot")
 public class Interview {
     @Id

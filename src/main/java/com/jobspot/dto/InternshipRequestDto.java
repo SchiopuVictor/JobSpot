@@ -2,22 +2,15 @@ package com.jobspot.dto;
 
 import com.jobspot.entity.InternshipStatus;
 import com.jobspot.entity.InternshipType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class InternshipResponseDto {
-
-    private String companyName;
+public class InternshipRequestDto {
+    private Long company_id;
     private String title;
     private String description;
     private String requirements;

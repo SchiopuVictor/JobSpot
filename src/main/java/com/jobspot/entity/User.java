@@ -7,16 +7,15 @@ import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "user", schema = "jobspot")
 public class User {
     @Id
@@ -30,8 +29,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     @Column(name = "created_at")
@@ -40,16 +39,28 @@ public class User {
     @Column(name = "active")
     private Boolean active = false;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany
+    @JoinColumn(name = "student_id")
     private Set<Application> applications = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<Company> companies = new LinkedHashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "student_id")
     private Set<Cv> cvs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "company")
-    private Set<Internship> internships = new LinkedHashSet<>();
+    @OneToMany
+    @JoinColumn(name = "student_id")
+    private Set<Evaluation> evaluations = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany
+    @JoinColumn(name = "user_id")
     private Set<Notification> notifications = new LinkedHashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<Student> students = new LinkedHashSet<>();
 
 }

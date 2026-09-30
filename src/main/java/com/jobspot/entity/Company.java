@@ -3,11 +3,16 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "company", schema = "jobspot")
 public class Company {
@@ -40,5 +45,8 @@ public class Company {
 
     @Column(name = "industry")
     private String industry;
+
+    @OneToMany(mappedBy = "company")
+    private Set<Internship> internships = new LinkedHashSet<>();
 
 }

@@ -3,8 +3,7 @@ package com.jobspot.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,6 +13,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Table(name = "application", schema = "jobspot")
 public class Application {
     @Id
@@ -23,7 +25,7 @@ public class Application {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private User student;
+    private Student student;
 
     @ManyToOne
     @JoinColumn(name = "internship_id")
@@ -36,8 +38,9 @@ public class Application {
     @JoinColumn(name = "cv_id")
     private Cv cv;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private ApplicationStatus status;
 
     @Column(name = "applied_at")
     private LocalDate appliedAt;

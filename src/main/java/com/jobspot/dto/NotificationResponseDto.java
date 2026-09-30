@@ -1,7 +1,6 @@
 package com.jobspot.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jobspot.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
