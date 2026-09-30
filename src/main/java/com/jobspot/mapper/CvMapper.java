@@ -8,7 +8,7 @@ public class CvMapper {
 
     public static CvResponseDto toDto(Cv cv){
         return CvResponseDto.builder()
-//                .userName(cv.getStudent().getFirstName()+ " "+cv.getStudent().getLastName())
+                .userName(cv.getStudent().getFirstName()+ " "+cv.getStudent().getLastName())
                 .createdAt(cv.getUploadedAt())
                 .fileName(cv.getFileName())
                 .build();

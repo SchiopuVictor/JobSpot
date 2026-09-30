@@ -2,10 +2,10 @@ package com.jobspot.service;
 
 import com.jobspot.dto.CvRequestDto;
 import com.jobspot.entity.Cv;
-import com.jobspot.entity.User;
+import com.jobspot.entity.Student;
 import com.jobspot.mapper.CvMapper;
 import com.jobspot.repository.CvRepository;
-import com.jobspot.repository.UserRepository;
+import com.jobspot.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,12 +17,13 @@ import java.time.LocalDate;
 public class CvService
 {
     private final CvRepository cvRepository;
-    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
     @Transactional
     public Cv createCv(CvRequestDto request){
-        User student = userRepository
-                .findById(request.getUser_Id()).orElseThrow(()->new RuntimeException("User not found!!"));
+        Student student = studentRepository
+                .findById(request.getUser_Id()).orElseThrow(()->new RuntimeException("Student not found!!"));
+
         Cv cv = CvMapper.toEntity(request);
         cv.setStudent(student);
         cv.setUploadedAt(LocalDate.now());
@@ -38,8 +39,9 @@ public class CvService
 
     @Transactional
     public Cv updateCv(CvRequestDto request, Long id){
-        User student = userRepository
-                .findById(request.getUser_Id()).orElseThrow(()->new RuntimeException("User not found!!"));
+        Student student = studentRepository
+                .findById(request.getUser_Id()).orElseThrow(()->new RuntimeException("Student not found!!"));
+
         Cv cv = cvRepository
                 .findById(id).orElseThrow(()->new RuntimeException("Cv not found!!"));
 

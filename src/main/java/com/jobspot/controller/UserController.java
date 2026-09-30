@@ -2,7 +2,6 @@ package com.jobspot.controller;
 
 import com.jobspot.dto.UserRequestDto;
 import com.jobspot.dto.UserResponseDto;
-import com.jobspot.entity.User;
 import com.jobspot.mapper.UserMapper;
 import com.jobspot.service.UserService;
 import jakarta.validation.Valid;

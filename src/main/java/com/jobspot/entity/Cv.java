@@ -23,7 +23,7 @@ public class Cv {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private User student;
+    private Student student;
 
     @Column(name = "file_name")
     private String fileName;
