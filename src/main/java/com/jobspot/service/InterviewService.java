@@ -3,6 +3,8 @@ package com.jobspot.service;
 import com.jobspot.dto.InterviewRequestDto;
 import com.jobspot.entity.Application;
 import com.jobspot.entity.Interview;
+import com.jobspot.exceptions.ApplicationNotFoundException;
+import com.jobspot.exceptions.InterviewNotFoundException;
 import com.jobspot.mapper.InterviewMapper;
 import com.jobspot.repository.ApplicationRepository;
 import com.jobspot.repository.InterviewRepository;
@@ -21,7 +23,7 @@ public class InterviewService {
         Interview interview = InterviewMapper.toEntity(request);
 
         Application application = applicationRepository.findById(request.getApplicationId())
-                        .orElseThrow(()->new RuntimeException("Application not found!!"));
+                        .orElseThrow(ApplicationNotFoundException::new);
 
         interview.setApplication(application);
 
@@ -30,16 +32,16 @@ public class InterviewService {
 
     public Interview getInterview(Long id){
         return interviewRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Interview not foud!!"));
+                .orElseThrow(InterviewNotFoundException::new);
     }
 
     @Transactional
     public Interview updateInterview(InterviewRequestDto request,Long id){
         Interview interview = interviewRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Interview not foud!!"));
+                .orElseThrow(InterviewNotFoundException::new);
 
         Application application = applicationRepository.findById(request.getApplicationId())
-                .orElseThrow(()->new RuntimeException("Application not found!!"));
+                .orElseThrow(ApplicationNotFoundException::new);
 
         interview.setApplication(application);
         interview.setDate(request.getDate());
@@ -55,7 +57,7 @@ public class InterviewService {
     @Transactional
     public void deleteInterview(Long id){
         interviewRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Interview not foud!!"));
+                .orElseThrow(InterviewNotFoundException::new);
         interviewRepository.deleteById(id);
     }
 }

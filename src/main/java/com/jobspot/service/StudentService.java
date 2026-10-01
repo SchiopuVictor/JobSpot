@@ -3,6 +3,8 @@ package com.jobspot.service;
 import com.jobspot.dto.StudentRequestDto;
 import com.jobspot.entity.Student;
 import com.jobspot.entity.User;
+import com.jobspot.exceptions.StudentNotFoundException;
+import com.jobspot.exceptions.UserNotFoundExceptions;
 import com.jobspot.mapper.StudentMapper;
 import com.jobspot.repository.StudentRepository;
 import com.jobspot.repository.UserRepository;
@@ -19,7 +21,7 @@ public class StudentService {
     @Transactional
     public Student createStudent(StudentRequestDto request){
         User user = userRepository.findById(request
-                .getUser_id()).orElseThrow(()->new RuntimeException("user not found!!"));
+                .getUser_id()).orElseThrow(StudentNotFoundException::new);
 
         Student student = StudentMapper.toEntity(request);
 
@@ -29,9 +31,9 @@ public class StudentService {
 
     public Student getStudent(Long id){
         Student student = studentRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
         userRepository.findById(student.getUser().getId())
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
         return student;
     }
@@ -40,10 +42,10 @@ public class StudentService {
     public Student updateStudent(StudentRequestDto request, Long id){
 
         Student student = studentRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
 
         User user = userRepository.findById(student.getUser().getId())
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
         student.setFirstName(request.getFirstName());
         student.setLastName(request.getLastName());
@@ -60,7 +62,7 @@ public class StudentService {
 
     @Transactional
     public void deleteStudent(Long id){
-        studentRepository.findById(id).orElseThrow(()->new RuntimeException("Student not found!!"));
+        studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         studentRepository.deleteById(id);
     }
 

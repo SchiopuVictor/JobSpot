@@ -4,6 +4,9 @@ import com.jobspot.dto.EvaluationRequestDto;
 import com.jobspot.entity.Evaluation;
 import com.jobspot.entity.Internship;
 import com.jobspot.entity.Student;
+import com.jobspot.exceptions.EvaluationNotFoundException;
+import com.jobspot.exceptions.InternshipNotFoundException;
+import com.jobspot.exceptions.StudentNotFoundException;
 import com.jobspot.mapper.EvaluationMapper;
 import com.jobspot.repository.EvaluationRepository;
 import com.jobspot.repository.InternshipRepository;
@@ -28,10 +31,10 @@ public class EvaluationService {
         Evaluation evaluation = EvaluationMapper.toEntity(request);
 
         Internship internship = internshipRepository.findById(request.getInternshipId())
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         Student student = studentRepository.findById(request.getStudentId())
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
 
         evaluation.setCreatedAt(LocalDate.now());
         evaluation.setInternship(internship);
@@ -42,20 +45,20 @@ public class EvaluationService {
 
     public Evaluation getEvaluation(Long id){
         return evaluationRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Evaluation not found!!"));
+                .orElseThrow(EvaluationNotFoundException::new);
     }
 
     @Transactional
     public Evaluation updateEvaluation(EvaluationRequestDto requestDto, Long id){
 
         Evaluation evaluation = evaluationRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Evaluation not found!!"));
+                .orElseThrow(EvaluationNotFoundException::new);
 
         Internship internship = internshipRepository.findById(requestDto.getInternshipId())
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         Student student = studentRepository.findById(requestDto.getStudentId())
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
 
         evaluation.setStudent(student);
         evaluation.setInternship(internship);
@@ -73,7 +76,7 @@ public class EvaluationService {
     @Transactional
     public void deleteEvaluation(Long id){
         evaluationRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Evaluation not found!!"));
+                .orElseThrow(EvaluationNotFoundException::new);
 
         evaluationRepository.deleteById(id);
     }

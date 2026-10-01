@@ -3,6 +3,8 @@ package com.jobspot.service;
 import com.jobspot.dto.InternshipRequestDto;
 import com.jobspot.entity.Company;
 import com.jobspot.entity.Internship;
+import com.jobspot.exceptions.CompanyNotFoundException;
+import com.jobspot.exceptions.InternshipNotFoundException;
 import com.jobspot.mapper.InternshipMapper;
 import com.jobspot.repository.CompanyRepository;
 import com.jobspot.repository.InternshipRepository;
@@ -21,7 +23,7 @@ public class InternshipService {
     @Transactional
     public Internship createInternship(InternshipRequestDto request){
         Company company = companyRepository.findById(request.getCompany_id())
-                .orElseThrow(() -> new RuntimeException("Company not found!!"));
+                .orElseThrow(CompanyNotFoundException::new);
 
         Internship internship = InternshipMapper.toEntity(request);
 
@@ -33,17 +35,17 @@ public class InternshipService {
 
     public Internship getInternship(Long id){
         return internshipRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
     }
 
     @Transactional
     public Internship updateInternship(InternshipRequestDto request,Long id){
 
         Company company = companyRepository.findById(request.getCompany_id())
-                .orElseThrow(()->new RuntimeException("Company not found!!"));
+                .orElseThrow(CompanyNotFoundException::new);
 
         Internship internship = internshipRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         internship.setCompany(company);
         internship.setDescription(request.getDescription());
@@ -65,7 +67,7 @@ public class InternshipService {
     @Transactional
     public void deleteInternship(Long id){
         internshipRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         internshipRepository.deleteById(id);
     }
