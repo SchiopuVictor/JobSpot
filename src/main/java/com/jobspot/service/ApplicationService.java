@@ -5,6 +5,10 @@ import com.jobspot.entity.Application;
 import com.jobspot.entity.Cv;
 import com.jobspot.entity.Internship;
 import com.jobspot.entity.Student;
+import com.jobspot.exceptions.ApplicationNotFoundException;
+import com.jobspot.exceptions.CvNotFoundException;
+import com.jobspot.exceptions.InternshipNotFoundException;
+import com.jobspot.exceptions.StudentNotFoundException;
 import com.jobspot.mapper.ApplicationMapper;
 import com.jobspot.repository.ApplicationRepository;
 import com.jobspot.repository.CvRepository;
@@ -29,13 +33,13 @@ public class ApplicationService {
         Application application = ApplicationMapper.toEntity(request);
 
         Cv cv = cvRepository.findById(request.getCv_id())
-                .orElseThrow(()->new RuntimeException("Cv-ul nu a fost gasit!!"));
+                .orElseThrow(CvNotFoundException::new);
 
         Internship internship = internshipRepository.findById(request.getInternship_id())
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         Student student = studentRepository.findById(request.getStudent_id())
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
 
         application.setCv(cv);
         application.setAppliedAt(LocalDate.now());
@@ -47,22 +51,22 @@ public class ApplicationService {
 
     public Application getApplication(Long id){
         return applicationRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Application not found!!"));
+                .orElseThrow(ApplicationNotFoundException::new);
     }
 
     @Transactional
     public Application updateApplication(ApplicationRequestDto request,Long id){
       Application application = applicationRepository.findById(id)
-              .orElseThrow(()->new RuntimeException("Application not found!!"));
+              .orElseThrow(ApplicationNotFoundException::new);
 
         Cv cv = cvRepository.findById(request.getCv_id())
-                .orElseThrow(()->new RuntimeException("Cv-ul nu a fost gasit!!"));
+                .orElseThrow(CvNotFoundException::new);
 
         Internship internship = internshipRepository.findById(request.getInternship_id())
-                .orElseThrow(()->new RuntimeException("Internship not found!!"));
+                .orElseThrow(InternshipNotFoundException::new);
 
         Student student = studentRepository.findById(request.getStudent_id())
-                .orElseThrow(()->new RuntimeException("Student not found!!"));
+                .orElseThrow(StudentNotFoundException::new);
 
         application.setStatus(request.getStatus());
         application.setStudent(student);
@@ -77,7 +81,7 @@ public class ApplicationService {
     @Transactional
     public void deleteApplication (Long id){
         applicationRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Application not found!!"));
+                .orElseThrow(ApplicationNotFoundException::new);
         applicationRepository.deleteById(id);
     }
 

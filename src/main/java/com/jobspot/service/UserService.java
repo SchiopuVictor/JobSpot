@@ -2,6 +2,7 @@ package com.jobspot.service;
 
 import com.jobspot.dto.UserRequestDto;
 import com.jobspot.entity.User;
+import com.jobspot.exceptions.UserNotFoundExceptions;
 import com.jobspot.mapper.UserMapper;
 import com.jobspot.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -24,14 +25,14 @@ public class UserService {
 
     public User getUser(Long id){
         return userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
     }
 
     @Transactional
     public User updateUser(UserRequestDto request, Long id){
         User user = userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
         user.setEmail(request.getEmail());
         user.setCreatedAt(LocalDate.now());
         user.setActive(request.getActive());
@@ -45,7 +46,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long id){
         userRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
         userRepository.deleteById(id);
     }

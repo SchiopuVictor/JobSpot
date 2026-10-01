@@ -2,6 +2,7 @@ package com.jobspot.service;
 
 import com.jobspot.dto.TehRequestDto;
 import com.jobspot.entity.Technology;
+import com.jobspot.exceptions.TechnologyNotFoundException;
 import com.jobspot.mapper.TehMapper;
 import com.jobspot.repository.TehRepository;
 import jakarta.transaction.Transactional;
@@ -21,14 +22,14 @@ public class TehService {
 
     public Technology getTechnology(Long id){
        return tehRepository.findById(id)
-               .orElseThrow(()->new RuntimeException("Technology not found!!"));
+               .orElseThrow(TechnologyNotFoundException::new);
 
     }
 
     @Transactional
     public Technology updateTechnology(TehRequestDto request, Long id){
         Technology technology = tehRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Technology not found!!"));
+                .orElseThrow(TechnologyNotFoundException::new);
 
         technology.setName(request.getName());
 
@@ -40,7 +41,7 @@ public class TehService {
     public void deleteTechnology(Long id){
 
         tehRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Technology not found!!"));
+                .orElseThrow(TechnologyNotFoundException::new);
         tehRepository.deleteById(id);
 
     }

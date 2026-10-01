@@ -3,6 +3,8 @@ package com.jobspot.service;
 import com.jobspot.dto.CompanyRequestDto;
 import com.jobspot.entity.Company;
 import com.jobspot.entity.User;
+import com.jobspot.exceptions.CompanyNotFoundException;
+import com.jobspot.exceptions.UserNotFoundExceptions;
 import com.jobspot.mapper.CompanyMapper;
 import com.jobspot.repository.CompanyRepository;
 import com.jobspot.repository.UserRepository;
@@ -20,7 +22,7 @@ public class CompanyService {
     public Company createCompany(CompanyRequestDto request){
 
         User user =userRepository.findById(request.getUser())
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
         Company company = CompanyMapper.toEntity(request);
         company.setUser(user);
@@ -31,16 +33,16 @@ public class CompanyService {
     public Company getCompany(Long id){
 
         return companyRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Company not found!!"));
+                .orElseThrow(CompanyNotFoundException::new);
     }
 
     @Transactional
     public Company updateCompany(CompanyRequestDto request, Long id){
         Company company = companyRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Company not found"));
+                .orElseThrow(CompanyNotFoundException::new);
 
         User user = userRepository.findById(company.getUser().getId())
-                .orElseThrow(()->new RuntimeException("User not found!!"));
+                .orElseThrow(UserNotFoundExceptions::new);
 
         company.setUser(user);
         company.setCompanyName(request.getCompanyName());
@@ -57,7 +59,7 @@ public class CompanyService {
     @Transactional
     public void deleteCompany(Long id){
         companyRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("Company not found!!"));
+                .orElseThrow(CompanyNotFoundException::new);
         companyRepository.deleteById(id);
     }
 
