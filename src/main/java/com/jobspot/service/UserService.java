@@ -7,6 +7,7 @@ import com.jobspot.mapper.UserMapper;
 import com.jobspot.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,11 +16,13 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public User createUser(UserRequestDto request){
         User user = UserMapper.toEntity(request);
         user.setCreatedAt(LocalDate.now());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);
     }
 
@@ -37,7 +40,7 @@ public class UserService {
         user.setCreatedAt(LocalDate.now());
         user.setActive(request.getActive());
         user.setRole(request.getRole());
-        user.setPassword(request.getPassword());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userRepository.save(user);
 
