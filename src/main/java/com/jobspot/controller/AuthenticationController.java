@@ -1,6 +1,8 @@
 package com.jobspot.controller;
 
 import com.jobspot.dto.AuthRequestDto;
+import com.jobspot.dto.JwtResponse;
+import com.jobspot.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,10 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(
+    public ResponseEntity<JwtResponse> login(
             @Valid @RequestBody AuthRequestDto request)
     {
         authenticationManager.authenticate(
@@ -27,8 +30,8 @@ public class AuthenticationController {
                         request.getEmail(),
                         request.getPassword()
                 ));
-
-        return ResponseEntity.ok().build();
+        String token = jwtService.generateToken(request.getEmail());
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 
 
