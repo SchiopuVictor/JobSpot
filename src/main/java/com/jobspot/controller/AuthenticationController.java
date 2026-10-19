@@ -15,11 +15,14 @@ import com.jobspot.mapper.StudentMapper;
 import com.jobspot.repository.CompanyRepository;
 import com.jobspot.repository.StudentRepository;
 import com.jobspot.repository.UserRepository;
+import com.jobspot.service.Jwt;
 import com.jobspot.service.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.patterns.IToken;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,8 +56,8 @@ public class AuthenticationController {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(UserNotFoundExceptions::new);
 
-        String accessToken = jwtService.generateAccessToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        String accessToken = jwtService.generateAccessToken(user).toString();
+        String refreshToken = jwtService.generateRefreshToken(user).toString();
 
         Cookie cookie = new Cookie("refreshToken",refreshToken);
         cookie.setHttpOnly(true);
@@ -67,13 +70,20 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
-    @PostMapping("/validate")
-    public boolean validateToken(@RequestHeader("Authorization") String headerToken){
+    public ResponseEntity<JwtResponse> getRefreshToken(
+            @CookieValue(value = "refreshToken") String refreshToken)
+    {
+        Jwt jwt = jwtService.parseToken(refreshToken);
 
-        String token = headerToken.replace("Bearer ","");
+        if(jwt==null || jwt.isExpired()){
+           return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+       }
 
-         return jwtService.validateToken(token);
 
+        User user = userRepository.findById(jwt.getUserIdFromToken(refreshToken)).orElseThrow();
+        String accessToken = jwtService.generateAccessToken(user).toString();
+
+        return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
     @GetMapping("/me")
