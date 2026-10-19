@@ -1,5 +1,6 @@
 package com.jobspot.filter;
 
+import com.jobspot.service.Jwt;
 import com.jobspot.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,12 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -30,15 +33,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String token = authHeader.replace("Bearer ","");
 
-        if(!jwtService.validateToken(token)){
+        Jwt jwt = jwtService.parseToken(token);
+
+        if(jwt==null || jwt.isExpired()){
             filterChain.doFilter(request,response);
             return;
         }
 
         UsernamePasswordAuthenticationToken authorization = new UsernamePasswordAuthenticationToken(
-                jwtService.getUserIdFromToken(token),
+                jwt.getUserIdFromToken(token),
                 null,
-                null
+                List.of(new SimpleGrantedAuthority("ROLE_"+jwt.getRoleFromToken(token)))
         );
 
         authorization.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

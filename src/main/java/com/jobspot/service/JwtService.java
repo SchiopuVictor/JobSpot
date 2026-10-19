@@ -1,6 +1,7 @@
 package com.jobspot.service;
 
 import com.jobspot.config.JwtConfig;
+import com.jobspot.entity.Role;
 import com.jobspot.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -15,37 +16,12 @@ import java.util.Date;
 public class JwtService {
     private final JwtConfig jwtConfig;
 
-    public String generateAccessToken(User user){
+    public Jwt generateAccessToken(User user){
         return generateToken(user, jwtConfig.getAccessTokenTime());
     }
 
-    public String generateRefreshToken(User user){
+    public Jwt generateRefreshToken(User user){
         return generateToken(user,jwtConfig.getRefreshTokenTime());
-    }
-
-    private String generateToken(User user, long currentMilliseconds) {
-        return Jwts.builder()
-                .subject(user.getId().toString())
-                .claim(user.getEmail(), "email")
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * currentMilliseconds))
-                .signWith(jwtConfig.getSecretKey())
-                .compact();
-    }
-
-    public boolean validateToken(String token){
-        try {
-            Claims claims = getClaims(token);
-            return claims.getExpiration().after(new Date());
-
-        }catch (JwtException e ){
-            return false;
-        }
-
-    }
-
-    public Long getUserIdFromToken(String token){
-        return Long.valueOf(getClaims(token).getSubject());
     }
 
     private Claims getClaims(String token) {
@@ -54,6 +30,28 @@ public class JwtService {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+    private Jwt generateToken(User user, long currentMilliseconds) {
+
+        Claims claims = Jwts.claims()
+                .subject(user.getId().toString())
+                .add("email",user.getEmail())
+                .add("role",user.getRole())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * currentMilliseconds))
+                .build();
+
+        return new Jwt(claims, jwtConfig.getSecretKey());
+    }
+
+    public Jwt parseToken(String token){
+        try {
+            Claims claims = getClaims(token);
+            return new Jwt(claims, jwtConfig.getSecretKey());
+        }catch (JwtException e){
+            return null;
+        }
     }
 
 }
