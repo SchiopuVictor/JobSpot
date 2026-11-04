@@ -1,12 +1,8 @@
 package com.jobspot.service;
 
-import com.jobspot.config.JwtConfig;
 import com.jobspot.entity.Role;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;

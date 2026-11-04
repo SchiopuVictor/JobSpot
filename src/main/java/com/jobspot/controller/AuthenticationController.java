@@ -70,6 +70,7 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtResponse(accessToken));
     }
 
+    @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> getRefreshToken(
             @CookieValue(value = "refreshToken") String refreshToken)
     {
