@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,6 +22,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +58,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity http){
         http
+            .cors(Customizer.withDefaults())
+            .authenticationProvider(authenticationProvider())
             .sessionManagement(c->
                 c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .csrf(AbstractHttpConfigurer::disable)
@@ -72,9 +80,21 @@ public class SecurityConfig {
                             response.setStatus(HttpStatus.FORBIDDEN.value()));
                 })
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration cors = new CorsConfiguration();
+        cors.addAllowedHeader("*");
+        cors.setAllowedMethods(List.of("POST","GET","PUT","DELETE"));
+        cors.setAllowCredentials(true);
+        cors.setAllowedOrigins(List.of("http://localhost:5173"));
+
+        UrlBasedCorsConfigurationSource urlSource = new UrlBasedCorsConfigurationSource();
+        urlSource.registerCorsConfiguration("/**",cors);
+
+        return urlSource;
     }
 
 }
