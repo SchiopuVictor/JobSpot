@@ -14,11 +14,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponseDto {
-
+    private Long id;
     private String email;
     private Role role;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
-    private Boolean active;
 
 }

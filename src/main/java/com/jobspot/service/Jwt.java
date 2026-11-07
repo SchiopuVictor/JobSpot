@@ -24,8 +24,7 @@ public class Jwt {
         return Role.valueOf(claims.get("role",String.class));
     }
 
-    public Long getUserIdFromToken(String token){
-
+    public Long getUserIdFromToken(){
         return Long.valueOf(claims.getSubject());
     }
 

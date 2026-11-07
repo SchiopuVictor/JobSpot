@@ -22,5 +22,4 @@ public class UserRequestDto {
     @ValidateRole(message = "this field must be completed!!")
     private Role role;
     private String password;
-    private Boolean active;
 }

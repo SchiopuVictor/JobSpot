@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         UsernamePasswordAuthenticationToken authorization = new UsernamePasswordAuthenticationToken(
-                jwt.getUserIdFromToken(token),
+                jwt.getUserIdFromToken(),
                 null,
                 List.of(new SimpleGrantedAuthority("ROLE_"+jwt.getRoleFromToken(token)))
         );

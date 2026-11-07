@@ -22,6 +22,7 @@ public class UserService {
     public User createUser(UserRequestDto request){
         User user = UserMapper.toEntity(request);
         user.setCreatedAt(LocalDate.now());
+        user.setActive(true);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);
     }
@@ -38,7 +39,7 @@ public class UserService {
                 .orElseThrow(UserNotFoundExceptions::new);
         user.setEmail(request.getEmail());
         user.setCreatedAt(LocalDate.now());
-        user.setActive(request.getActive());
+        user.setActive(true);
         user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
@@ -48,9 +49,9 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Long id){
-        userRepository.findById(id)
+       User user =  userRepository.findById(id)
                 .orElseThrow(UserNotFoundExceptions::new);
-
+        user.setActive(false);
         userRepository.deleteById(id);
     }
 
