@@ -8,6 +8,7 @@ public class CompanyMapper {
 
     public static CompanyResponseDto toDto(Company company){
         return CompanyResponseDto.builder()
+                .id(company.getId())
                 .companyName(company.getCompanyName())
                 .address(company.getAddress())
                 .phone(company.getPhone())

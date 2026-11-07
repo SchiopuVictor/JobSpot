@@ -7,17 +7,16 @@ import com.jobspot.entity.User;
 public class UserMapper {
     public static UserResponseDto toDto(User request){
         return UserResponseDto.builder()
+                .id(request.getId())
                 .email(request.getEmail())
                 .role(request.getRole())
                 .createdAt(request.getCreatedAt())
-                .active(request.getActive())
                 .build();
     }
 
     public static User toEntity(UserRequestDto request){
         return User.builder()
                 .email(request.getEmail())
-                .active(request.getActive())
                 .role(request.getRole())
                 .password(request.getPassword())
                 .build();

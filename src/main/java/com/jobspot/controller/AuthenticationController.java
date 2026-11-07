@@ -81,7 +81,7 @@ public class AuthenticationController {
        }
 
 
-        User user = userRepository.findById(jwt.getUserIdFromToken(refreshToken)).orElseThrow();
+        User user = userRepository.findById(jwt.getUserIdFromToken()).orElseThrow();
         String accessToken = jwtService.generateAccessToken(user).toString();
 
         return ResponseEntity.ok(new JwtResponse(accessToken));
