@@ -1,0 +1,109 @@
+.register-page {
+    background: #f4f6fc;
+}
+
+.register-container {
+    width: 1100px;
+    min-height: 680px;
+    background: white;
+    position: relative;
+}
+
+.register-form {
+    width: 65%;
+    padding: 45px 65px;
+    transition: transform 0.7s ease-in-out;
+}
+
+.register-form h2 {
+    color: #333;
+    font-weight: 700;
+}
+
+.register-form form {
+    max-width: 550px;
+}
+
+.register-form .form-control,
+.register-form .form-select {
+    padding: 13px;
+    border-radius: 8px;
+}
+
+.register-form .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.register-welcome-section,
+.register-login-section {
+    width: 35%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
+    color: white;
+    transition: transform 0.7s ease-in-out;
+}
+
+.register-login-section {
+    transform: translateX(100%);
+}
+
+.register-welcome-section h2,
+.register-login-section h2 {
+    font-weight: 700;
+}
+
+.register-welcome-section p,
+.register-login-section p {
+    max-width: 280px;
+    margin: 20px 0 30px;
+}
+
+.register-welcome-section .btn-outline-primary,
+.register-login-section .btn-outline-primary {
+    color: white;
+    border-color: white;
+}
+
+.register-welcome-section .btn-outline-primary:hover,
+.register-login-section .btn-outline-primary:hover {
+    background: white;
+    color: #0d6efd;
+}
+
+/* Animation */
+.register-active .register-form {
+    transform: translateX(53.85%);
+}
+
+.register-active .register-welcome-section {
+    transform: translateX(-100%);
+}
+
+.register-active .register-login-section {
+    transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        width: 95%;
+        min-height: 680px;
+    }
+
+    .register-form {
+        width: 100%;
+        padding: 30px;
+    }
+
+    .register-welcome-section,
+    .register-login-section {
+        display: none !important;
+    }
+
+    .register-active .register-form {
+        transform: none;
+    }
+}

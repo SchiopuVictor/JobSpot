@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gold Linear Gradient for Arcs & Accents -->
+    <linearGradient id="goldLinear" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CA9E5E"/>
+      <stop offset="30%" stop-color="#FBF0B9"/>
+      <stop offset="50%" stop-color="#D4A762"/>
+      <stop offset="75%" stop-color="#9E6F2B"/>
+      <stop offset="100%" stop-color="#C59A51"/>
+    </linearGradient>
+
+    <!-- Gold Radial Gradient for Center Circle -->
+    <radialGradient id="goldRadial" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FFF3C4"/>
+      <stop offset="40%" stop-color="#DCAE66"/>
+      <stop offset="85%" stop-color="#8F6122"/>
+      <stop offset="100%" stop-color="#6E4813"/>
+    </radialGradient>
+
+    <!-- Gold Tassel Metal/Gradient -->
+    <linearGradient id="goldTassel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEBB0"/>
+      <stop offset="50%" stop-color="#C59A51"/>
+      <stop offset="100%" stop-color="#7A5217"/>
+    </linearGradient>
+
+    <!-- Drop Shadow for Mortarboard Top -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g id="logo-mark">
+    <!-- Bottom Slate Blue Chevron Base -->
+    <path d="M 188 325 
+             A 120 120 0 0 0 312 325 
+             L 250 398 
+             Z" 
+          fill="#5B7083"/>
+
+    <!-- Dark Slate Pin / Location Marker Body -->
+    <!-- Outer boundary of pin -->
+    <!-- Inner cut-out hole diameter is 112px -->
+    <path fill="#374349" fill-rule="evenodd" d="
+      M 250 172
+      C 183.73 172 130 225.73 130 292
+      C 130 338 180 388 250 438
+      C 320 388 370 338 370 292
+      C 370 225.73 316.27 172 250 172
+      Z
+      M 250 236
+      A 56 56 0 1 1 249.99 236
+      Z"/>
+
+    <!-- Gold Band Arch under Cap -->
+    <path d="M 196 181 
+             A 84 84 0 0 1 304 181 
+             L 304 138 
+             A 124 124 0 0 0 196 138 
+             Z" 
+          fill="url(#goldLinear)"/>
+
+    <!-- Center Gold Dot / Sphere -->
+    <circle cx="250" cy="292" r="32" fill="url(#goldRadial)"/>
+
+    <!-- Mortarboard Cap Top -->
+    <polygon points="250,90 445,145 250,200 55,145" 
+             fill="#374349" 
+             filter="url(#shadow)"/>
+
+    <!-- Tassel String and Fringe -->
+    <!-- Tassel String -->
+    <path d="M 420 138 L 428 138 L 430 215 L 422 215 Z" fill="url(#goldTassel)"/>
+    
+    <!-- Tassel Ring / Button -->
+    <ellipse cx="426" cy="215" rx="7" ry="4" fill="url(#goldLinear)"/>
+    
+    <!-- Tassel Cap/Band -->
+    <path d="M 416 218 L 436 218 L 438 228 L 414 228 Z" fill="url(#goldLinear)"/>
+    
+    <!-- Tassel Body / Fringe -->
+    <path d="M 414 228 
+             C 412 245 410 262 408 275 
+             L 444 275 
+             C 442 262 440 245 438 228 
+             Z" 
+          fill="url(#goldLinear)"/>
+  </g>
+</svg>
