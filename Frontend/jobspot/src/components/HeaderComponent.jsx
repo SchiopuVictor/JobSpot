@@ -8,8 +8,22 @@ function HeaderComponent() {
     const navigate = useNavigate();
     return (
         <div>
-            <header className="header p-3">
-                <nav className="navbar navbar-expand-md navbar-light bg-white rounded-pill shadow-sm px-4 d-flex justify-content-between align-items-center">
+            <header className="header">
+                <nav className="navbar 
+                     navbar-expand-md 
+                     navbar-light 
+                     bg-white 
+                     rounded-pill 
+                     shadow-sm
+                     px-4 
+                     d-flex 
+                     justify-content-between 
+                     align-items-center 
+                     position-absolute 
+                     top-0 
+                     start-50
+                     translate-middle-x
+                     z-2">
                     <Link className="navbar-brand fw-bold text-dark" to="/">
                         JobSpot                
                     </Link>
