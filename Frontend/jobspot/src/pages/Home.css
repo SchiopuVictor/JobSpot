@@ -1,0 +1,283 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap");
+
+/* ---------- Mobil ---------- */
+@media (max-width: 991px) {
+  .arch-overlay {
+    background: rgba(255, 255, 255, 0.82);
+  }
+}
+
+:root {
+  --arch-purple: #6c47ff;
+  --arch-dark: #14122b;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.top-container {
+  position: relative;
+  min-height: 70vh;
+  text-align: left;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* strat deschis peste poză, mai puternic pe stânga unde e textul */
+.arch-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.50) 0%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+}
+
+/* ---------- Butoane ---------- */
+.btn-arch {
+  background: var(--arch-purple);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8px 20px rgba(108, 71, 255, 0.35);
+}
+
+.btn-arch:hover {
+  background: #5636e0;
+  color: #fff;
+}
+
+/* ---------- Conținut hero ---------- */
+.arch-content {
+  min-height: 50%;
+  padding: 100px 0 40px;
+}
+
+.arch-title {
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--arch-dark);
+}
+
+.text-arch {
+  color: var(--arch-purple);
+}
+
+.arch-text {
+  max-width: 420px;
+  color: #4a4a5e;
+  font-size: 0.95rem;
+}
+
+/* ---------- Card dreapta ---------- */
+.arch-card {
+  position: relative;
+  max-width: 440px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 6px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 25px 60px rgba(20, 18, 43, 0.25);
+}
+
+.arch-card-img {
+  display: block;
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+.arch-stats {
+  position: absolute;
+  right: 77px;
+  bottom: 16px;
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.8rem 1.4rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+}
+
+.arch-stats strong {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--arch-dark);
+}
+
+.arch-stats small {
+  color: #6b6b80;
+  font-size: 0.7rem;
+}
+
+.programs-title{
+  display: block;
+  font-size: 40px;
+  align-items: center;
+  font-weight: 550;
+}
+
+.programs-text {
+    width: 400px;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.container-next{
+  background-color: rgb(253, 248, 255);
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.textul{
+  font-weight: 500;
+  display: block;
+  width: 550px;
+  text-align: left;
+}
+
+.h2text{
+  font-weight: 750;
+  font-size: 50px;
+  color: #24175d;
+}
+
+.hr-next{
+  width: 78px;
+  height: 3px;
+  background-color: rgb(159, 22, 152);
+  border: none;
+  margin-bottom: 14px;
+}
+
+.number-next{
+  display: flex;
+}
+
+.verical-line{
+  width: 3px;
+  height: 60px;
+  background-color: #7b7b7b;
+  margin-left: 30px;
+  margin-top: 18px;
+  margin-right: 30px;
+}
+
+.text-next{
+  text-align: left;
+}
+
+.number{
+  display: block;
+  font-size: 50px;
+  font-weight: 700;
+}
+.text-number{
+  display: block;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.next-img{
+  display: block;
+  width: 380px;
+  height: 400px;
+  margin-top: 40px;
+  margin-left: 45px;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+.right-next{
+  display: block;
+  margin-top: 20px;
+}
+
+.container-cards{
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.card{
+  display: block;
+  background-color: white;
+  width: 350px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  height: 250px;
+}
+
+.edu-card {
+  width: 60px;
+  height: 60px;
+  background-color: #f3f0ff;
+  border-radius: 15px;
+  display: flex;
+  margin-top: 30px;
+  margin-left: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.edu-svg-icon {
+  fill: #0e1eff;
+  width: 36px;
+  height: 36px;
+}
+
+.card-title{
+  display: flex;
+  justify-content: left;
+  margin-left: 30px;
+}
+
+.card-text{
+  text-align: left;
+  margin-left: 30px;
+  display: flex;
+}
+
+.container-bottom {
+  margin-top: 30px;
+  position: relative;
+  min-height: 70vh;
+  text-align: left;
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.bottom-overlay{
+    position: absolute;
+    inset: 0;
+   background: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 0.68) 10%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.2) 60%
+  );
+}
+
+.left-bottom,
+.right-bottom{
+  min-width: 50%;
+  z-index: 1;
+  position: relative;
+}
+
+.right-bottom{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
