@@ -19,11 +19,11 @@ function HeaderComponent() {
                      d-flex 
                      justify-content-between 
                      align-items-center 
-                     position-absolute 
+                     position-absolute
                      top-0 
                      start-50
                      translate-middle-x
-                     z-2">
+                     z-3">
                     <Link className="navbar-brand fw-bold text-dark" to="/">
                         JobSpot                
                     </Link>

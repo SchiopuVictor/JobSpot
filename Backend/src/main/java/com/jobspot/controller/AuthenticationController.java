@@ -112,7 +112,6 @@ public class AuthenticationController {
         Company company = companyRepository.findByUserId(user.getId())
                 .orElseThrow(CompanyNotFoundException::new);
 
-
         return ResponseEntity.ok(CompanyMapper.toDto(company));
 
     }
