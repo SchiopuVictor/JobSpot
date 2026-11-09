@@ -123,8 +123,9 @@ body {
 }
 
 .programs-text {
+
     width: 400px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 300;
     text-align: center;
     margin: 0 auto;
@@ -136,6 +137,11 @@ body {
   align-items: center;
   gap: 40px;
 }
+
+.container-programs{
+  margin-top: 15px;
+}
+
 .textul{
   font-weight: 500;
   display: block;
@@ -197,6 +203,7 @@ body {
 
 .right-next{
   display: block;
+  flex-direction: column;
   margin-top: 20px;
 }
 
@@ -214,6 +221,16 @@ body {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
   border-radius: 15px;
   height: 250px;
+}
+
+.mid-card{
+  display: block;
+  background-color: rgb(253, 248, 255);
+  width: 350px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 15px;
+  height: 250px;
+
 }
 
 .edu-card {
@@ -238,11 +255,18 @@ body {
   display: flex;
   justify-content: left;
   margin-left: 30px;
+  margin-top: 10px;
+}
+
+.text-card{
+  font-size: 25px;
+  font-weight: 650;
 }
 
 .card-text{
-  text-align: left;
+  width: 300px;
   margin-left: 30px;
+  text-align: left;
   display: flex;
 }
 
@@ -280,4 +304,19 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 40px;
+}
+
+.title-bottom{
+  color: #24175d;
+  font-size: 40px;
+  font-weight: 670;
+}
+
+.text{
+  display: block;
+  width: 450px;
+}
+
+.text-font{
+  font-size: 15px;
 }

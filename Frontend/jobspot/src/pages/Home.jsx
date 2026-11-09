@@ -1,5 +1,6 @@
 import "./Home.css"
 import CARD_IMAGE2 from "../assets/wes-hicks-4-EeTnaC1S4-unsplash.jpg";
+import { Link } from "react-router-dom";
 
 const BG_IMAGE =
     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80";
@@ -20,22 +21,22 @@ function Home() {
                             <br />
                             <span className="text-arch">Smarter</span>
                             <br />
-                            Grow Faster.
+                            Grow Faster
                         </h1>
 
                         <p className="arch-text mt-3">
-                            A modern coaching institute website with premium purple aesthetics,
-                            clean layouts, strong typography, smooth scoring, and a fresh
-                            student-focused experience.
+                           A modern internship platform connecting students with companies, 
+                           featuring a clean interface, intuitive navigation, seamless applications,
+                           and a career-focused experience.
                         </p>
 
                         <div className="d-flex flex-wrap gap-3 mt-4">
-                            <a href="#start" className="btn btn-arch rounded-pill px-4 py-2">
-                                Start Learning
-                            </a>
-                            <a href="#courses" className="btn btn-light rounded-pill px-4 py-2 shadow-sm">
-                                Explore Courses
-                            </a>
+                            <Link to="/internship" className="btn btn-arch rounded-pill px-4 py-2">
+                                Explore Internships
+                            </Link>
+                            <Link to="/cv" className="btn btn-light rounded-pill px-4 py-2 shadow-sm">
+                                Profile Setup
+                            </Link>
                         </div>
                     </div>
 
@@ -46,11 +47,11 @@ function Home() {
                             <div className="arch-stats">
                                 <div>
                                     <strong>10K+</strong>
-                                    <small>Students Trained</small>
+                                    <small>Students applayed</small>
                                 </div>
                                 <div>
                                     <strong>96%</strong>
-                                    <small>Success Rate</small>
+                                    <small>Application Sent</small>
                                 </div>
                             </div>
                         </div>
@@ -77,9 +78,9 @@ function Home() {
                 
                 <div >
                     <p className="textul">
-                        A modern coaching institute website with premium purple aesthetics,
-                        clean layouts, strong typography, smooth scoring, and a fresh
-                        student-focused experience.
+                        Discover opportunities, develop your skills, 
+                        and take the first step toward your future career.
+                        Connecting ambitious students with companies shaping tomorrow.
                     </p>
                 </div>
                 <div className="number-next">
@@ -114,8 +115,8 @@ function Home() {
                 </h2>
             </div>
             <div>
-                <h3  className="programs-text">
-                    A modern coaching institute website with premium purple aesthetics.
+                <h3 className="programs-text">
+                    Explore popular internships from companies looking for talented students.
                 </h3>
             </div>
         </div>
@@ -136,15 +137,17 @@ function Home() {
                 </div>
 
                 <div className="card-title">
-                    <h2>New skills</h2>
+                    <h2 className="text-card">Skill Development</h2>
                 </div>
                 
                 <div className="card-text">
-                    <p>Learn new skills and improve your career prospects with our comprehensive courses.</p>
+                    <p className="text-font">Learn valuable technical and professional skills 
+                        by working on real-world projects and challenging tasks.
+                    </p>
                 </div>
             </div>
             
-            <div className="card">
+            <div className="mid-card">
                 <div className="edu-card">
                      <svg 
                      className="edu-svg-icon"
@@ -158,10 +161,12 @@ function Home() {
                     </svg>
                 </div>
                 <div className="card-title">
-                    <h2>Eperiences</h2>
+                    <h2 className="text-card">Real Experience</h2>
                 </div>
                 <div className="card-text">
-                    <p>In timp ce face internshipul optii experienta in domeniul dorit.</p>
+                    <p className="text-font">Gain hands-on experience in your chosen field,
+                        apply your knowledge,
+                        and prepare yourself for the professional world.</p>
                 </div>
             </div>
             <div className="card">
@@ -178,10 +183,12 @@ function Home() {
                     </svg>
                 </div>
                 <div className="card-title">
-                    <h2>Students</h2>
+                    <h2 className="text-card">Career Growth</h2>
                 </div>
                 <div className="card-text">
-                    <p>Students can learn new skills and improve their career prospects with our comprehensive courses.</p>
+                    <p className="text-font">Connect with companies, explore internship opportunities,
+                        and take your first steps toward a successful career.
+                    </p>
                 </div>
             </div>
         </div>
@@ -193,25 +200,26 @@ function Home() {
 
             <div className="right-bottom">
 
-                <div className="title-bottom">
-                    <h2>Education That
+                <div>
+                    <h2 className="title-bottom">
+                        Your Career
                         <br/>
-                        Feels Inspiring
+                        Starts Here
                     </h2>
                 </div>
                 
                 <div className="bottom-text">
                     <p className="text">
-                        A modern coaching institute website with premium purple aesthetics,
-                        clean layouts, strong typography, smooth scoring, and a fresh
-                        student-focused experience.
+                        Discover exciting internship opportunities,
+                        gain real-world experience, develop valuable skills,
+                        and connect with companies that can help shape your professional future...
                     </p>
                 </div>
                 
                 <div className="button-bottom">
-                    <a href="#start" className="btn btn-arch rounded-pill px-4 py-2">
+                    <Link to="/internship" className="btn btn-arch rounded-pill px-4 py-2">
                             Find internship
-                    </a>
+                    </Link>
                 </div>
             
             </div>

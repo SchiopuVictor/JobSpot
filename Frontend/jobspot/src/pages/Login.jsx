@@ -13,10 +13,11 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = await api.post("/auth/login", { email, password });
+            const response = await api.post("/auth/login", { email, password});
 
             setAccessToken(response.data.token);
             setAuthToken(response.data.token);
+
             navigate("/home");
 
         } catch (error) {

@@ -2,16 +2,25 @@ import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import "./AuthPage.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function AuthPage({ initialMode = "login" }) {
-    const [isLogin, setIsLogin] = useState(initialMode === "login");
+function AuthPage() {
     const [isGrowing, setIsGrowing] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isLogin = location.pathname==="/login";
+
     function changeForm() {
+        if(isGrowing) return;
         setIsGrowing(true);
-        setTimeout(() => setIsGrowing(false), 1500);
-        setIsLogin((prev) => !prev);
+        navigate(isLogin ?"/register":"login",{
+            replace: true
+        });
+        
+        setTimeout(()=>{
+            setIsGrowing(false);
+        },1250);
     }
 
     return (
@@ -56,7 +65,7 @@ function AuthPage({ initialMode = "login" }) {
                             type="button"
                             className="auth-button auth-switch__button"
                             onClick={
-                                changeForm
+                                    changeForm        
                             }
                         >
                             SIGN IN
