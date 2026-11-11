@@ -1,4 +1,4 @@
-import "./Home.css"
+import "../styles/Home.css"
 import CARD_IMAGE2 from "../assets/wes-hicks-4-EeTnaC1S4-unsplash.jpg";
 import { Link } from "react-router-dom";
 
@@ -196,6 +196,7 @@ function Home() {
             <div className="bottom-overlay" />
             
             <div className="left-bottom">
+                
             </div>
 
             <div className="right-bottom">

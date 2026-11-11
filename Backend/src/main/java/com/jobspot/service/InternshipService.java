@@ -10,9 +10,11 @@ import com.jobspot.repository.CompanyRepository;
 import com.jobspot.repository.InternshipRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +24,16 @@ public class InternshipService {
 
     @Transactional
     public Internship createInternship(InternshipRequestDto request){
-        Company company = companyRepository.findById(request.getCompany_id())
+
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        assert principal != null;
+        Long userId = Long.valueOf(principal.toString());
+
+        Company company = companyRepository.findByUserId(userId)
                 .orElseThrow(CompanyNotFoundException::new);
 
         Internship internship = InternshipMapper.toEntity(request);
@@ -41,7 +52,13 @@ public class InternshipService {
     @Transactional
     public Internship updateInternship(InternshipRequestDto request,Long id){
 
-        Company company = companyRepository.findById(request.getCompany_id())
+        Long userId = (Long) Objects.requireNonNull(SecurityContextHolder
+                        .getContext()
+                        .getAuthentication())
+                .getPrincipal();
+
+        assert userId != null;
+        Company company = companyRepository.findById(userId)
                 .orElseThrow(CompanyNotFoundException::new);
 
         Internship internship = internshipRepository.findById(id)

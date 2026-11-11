@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponet';
 import AuthPage from '../pages/AuthPage';
+import CreateInternship from '../pages/CreateInternship';
 
 function AppContent() {
     const location = useLocation();
@@ -19,18 +20,19 @@ function AppContent() {
             <HeaderComponent />
 
             <div className="flex-grow-1">
-                {isAuthPage ? (
+                {isAuthPage ? 
+                (
                     <AuthPage />
                 ) : (
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path='/addintership' element = {<CreateInternship />} />
                         <Route path="/internship" element={<Internshipuri />} />
                         <Route path="/notificari" element={<Notificari />} />
                         <Route path="/cv" element={<Cv />} />
                     </Routes>
                 )}
             </div>
-
             <FooterComponent />
         </div>
     );

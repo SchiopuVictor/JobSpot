@@ -24,10 +24,10 @@ public class InternshipResponseDto {
     private String responsibilities;
     private String location;
     private InternshipType type;
-    private Instant duration;
+    private LocalDate duration;
     private String availablePositions;
     private BigDecimal salary;
-    private Instant applicationDeadline;
+    private LocalDate applicationDeadline;
     private LocalDate createdAt;
     private InternshipStatus status;
 }
