@@ -42,6 +42,7 @@ function Register() {
                     password,
                     role
                 });
+                
                 const userId = response.data.id;
 
                 if( role === "Student"){

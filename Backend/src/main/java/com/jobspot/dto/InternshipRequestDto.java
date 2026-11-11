@@ -10,17 +10,15 @@ import java.time.LocalDate;
 
 @Data
 public class InternshipRequestDto {
-    private Long company_id;
     private String title;
     private String description;
     private String requirements;
     private String responsibilities;
     private String location;
     private InternshipType type;
-    private Instant duration;
+    private LocalDate duration;
     private String availablePositions;
     private BigDecimal salary;
-    private Instant applicationDeadline;
-    private LocalDate createdAt;
+    private LocalDate applicationDeadline;
     private InternshipStatus status;
 }

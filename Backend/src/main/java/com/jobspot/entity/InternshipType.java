@@ -4,5 +4,4 @@ public enum InternshipType {
     Remote,
     Hybrid,
     On_Site
-
 }

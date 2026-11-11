@@ -48,7 +48,7 @@ public class Internship {
     private InternshipType type;
 
     @Column(name = "duration")
-    private Instant duration;
+    private LocalDate duration;
 
     @Column(name = "available_positions")
     private String availablePositions;
@@ -57,7 +57,7 @@ public class Internship {
     private BigDecimal salary;
 
     @Column(name = "application_deadline")
-    private Instant applicationDeadline;
+    private LocalDate applicationDeadline;
 
     @Column(name = "created_at")
     private LocalDate createdAt;

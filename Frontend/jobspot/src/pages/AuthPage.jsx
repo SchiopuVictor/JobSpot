@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
-import "./AuthPage.css";
+import "../styles/AuthPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function AuthPage() {
