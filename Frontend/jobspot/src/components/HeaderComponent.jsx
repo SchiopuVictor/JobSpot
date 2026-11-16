@@ -1,6 +1,6 @@
 import '../styles/header.css';
 import {useAuth} from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function HeaderComponent() {
     
@@ -9,73 +9,51 @@ function HeaderComponent() {
     return (
         <div>
             <header className="header">
-                <nav className="navbar 
-                     navbar-expand-md 
-                     navbar-light 
-                     bg-white 
-                     rounded-pill 
-                     shadow-sm
-                     px-4 
-                     d-flex 
-                     justify-content-between 
-                     align-items-center 
-                     position-absolute
-                     top-0 
-                     start-50
-                     translate-middle-x
-                     z-3">
-                    <Link className="navbar-brand fw-bold text-dark" to="/">
+                <nav className="navbar">
+                    <NavLink className="navbar-brand" to="/">
                         JobSpot                
-                    </Link>
-                    <button 
-                        className="navbar-toggler" 
-                        type="button" 
-                        data-toggle="collapse" 
-                        data-target="#navbarNav" 
-                        aria-controls="navbarNav" 
-                        aria-expanded="false" 
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
+                    </NavLink>
 
-                    <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-                        <ul className="navbar-nav gap-3">
-                            <li className="nav-item">
-                                <Link className="nav-link fw-semibold text-primary" to="/">
+                   <div className="navbar-info" id="navbarNav">
+                        <ul className="jobspot-nav">
+                            <li>
+                                <NavLink className="jobspot-link" to="/" end>
                                     Home
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link fw-semibold text-secondary" to="/internship">
+
+                            <li>
+                                <NavLink className="jobspot-link" to="/internship">
                                     Internships
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link fw-semibold text-secondary" to="/notificari">
+
+                            <li>
+                                <NavLink className="jobspot-link" to="/notificari">
                                     Notificari
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link fw-semibold text-secondary" to="/cv">
+
+                            <li>
+                                <NavLink className="jobspot-link" to="/cv">
                                     CV
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
                     {   
                         accessToken === null?
-                        <div className="d-none d-md-block">
-                            <Link to="/login" className="btn btn-primary rounded-pill px-4 hover-shadow hover-invert">
+                        <div className="log-regis">
+                            <NavLink to="/login" className="log-btn">
                                 Login
-                            </Link>
-                            <Link to="/register" className="btn btn-outline-primary rounded-pill px-4 ms-2 hover-shadow hover-invert">
-                                Register
-                            </Link>
+                            </NavLink>
+                            <NavLink to="/register" className="regi-btn">
+                                Sign Up
+                            </NavLink>
                         </div>
                         :
                         <div>
-                            <button className="btn btn-primary rounded-pill px-4 hover-shadow hover-invert"
+                            <button className="log-out"
                                 onClick={()=>{
                                     logout()
                                     navigate("/login")

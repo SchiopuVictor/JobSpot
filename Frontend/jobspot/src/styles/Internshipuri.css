@@ -219,13 +219,17 @@ body {
     line-height: 1.3; 
 }
 
-.card-filter button{
+.moreInfo{
     border-radius: 10px;
     border: none;
+    
+    text-align: center;
+    text-decoration: none;
     justify-content: center;
+    align-items: center;
     width: 130px;
-    height: 25px;
-    font-size: 15px;
+    height: 30px;
+    font-size: 16px;
     margin-top: 20px;
     background-color: #acc0ed;
     color: #111;
@@ -389,7 +393,6 @@ body {
 
 /* Partea superioară */
 .top-card {
-    background-color: #ffe2ce;
     border-radius: 15px;
     padding: 15px;
     min-height: 185px;
@@ -459,11 +462,13 @@ body {
     box-sizing: content-box;
 }
 
-.informa-right img {
+.img-url{
+    display: block;
     width: 40px;
     height: 40px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 50%;
+    background-repeat: no-repeat;
     background-color: white;
 }
 

@@ -1,322 +1,431 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&display=swap");
-
-/* ---------- Mobil ---------- */
-@media (max-width: 991px) {
-  .arch-overlay {
-    background: rgba(255, 255, 255, 0.82);
-  }
-}
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  --arch-purple: #6c47ff;
-  --arch-dark: #14122b;
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
+
+    /* nuante derivate din paleta (pentru fundaluri si text secundar) */
+    --sand-light: #F3EEE3;      /* sand foarte deschis, fundal sectiuni */
+    --sand-soft: #E9E0CF;       /* sand intermediar, borduri */
+    --charcoal-soft: #55524B;   /* text secundar */
+    --blue-tint: #E6EDFF;       /* fundal iconite */
 }
 
 body {
-  font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: var(--charcoal);
 }
 
+/* =========================================================
+   HERO
+   ========================================================= */
 .top-container {
-  position: relative;
-  min-height: 70vh;
-  text-align: left;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
+    position: relative;
+    min-height: 70vh;
+    text-align: left;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
-/* strat deschis peste poză, mai puternic pe stânga unde e textul */
+/* strat sand peste poza, mai puternic pe stanga unde e textul */
 .arch-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.50) 0%,
-    rgba(255, 255, 255, 0.6) 40%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(243, 238, 227, 0.92) 0%,
+        rgba(243, 238, 227, 0.78) 40%,
+        rgba(243, 238, 227, 0.10) 100%
+    );
+}
+
+.arch-content {
+    min-height: 50%;
+    padding: 120px 0 40px;   /* spatiu pentru navbar-ul plutitor */
+}
+
+.arch-title {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--charcoal);
+}
+
+.text-arch {
+    color: var(--electric-blue);
+}
+
+.arch-text {
+    max-width: 420px;
+    color: var(--charcoal-soft);
+    font-size: 0.95rem;
 }
 
 /* ---------- Butoane ---------- */
 .btn-arch {
-  background: var(--arch-purple);
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  box-shadow: 0 8px 20px rgba(108, 71, 255, 0.35);
+    background: var(--charcoal);
+    color: var(--sand);
+    font-weight: 600;
+    border: 1px solid var(--charcoal);
+    border-radius: 999px;
+    padding: 12px 28px;
+    box-shadow: 0 8px 20px rgba(30, 30, 28, 0.25);
+    transition: 0.2s ease;
 }
 
 .btn-arch:hover {
-  background: #5636e0;
-  color: #fff;
-}
-
-/* ---------- Conținut hero ---------- */
-.arch-content {
-  min-height: 50%;
-  padding: 100px 0 40px;
-}
-
-.arch-title {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
-  font-weight: 600;
-  line-height: 1.05;
-  color: var(--arch-dark);
-}
-
-.text-arch {
-  color: var(--arch-purple);
-}
-
-.arch-text {
-  max-width: 420px;
-  color: #4a4a5e;
-  font-size: 0.95rem;
+    background: var(--electric-blue);
+    border-color: var(--electric-blue);
+    color: #fff;
 }
 
 /* ---------- Card dreapta ---------- */
 .arch-card {
-  position: relative;
-  max-width: 440px;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 6px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 25px 60px rgba(20, 18, 43, 0.25);
+    position: relative;
+    max-width: 440px;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 6px solid rgba(216, 203, 179, 0.75);
+    box-shadow: 0 25px 60px rgba(30, 30, 28, 0.30);
 }
 
 .arch-card-img {
-  display: block;
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
 }
 
 .arch-stats {
-  position: absolute;
-  right: 77px;
-  bottom: 16px;
-  display: flex;
-  gap: 1.5rem;
-  padding: 0.8rem 1.4rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
+    position: absolute;
+    right: 77px;
+    bottom: 16px;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.8rem 1.4rem;
+    background: rgba(30, 30, 28, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
 }
 
 .arch-stats strong {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--arch-dark);
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--sand);
 }
 
 .arch-stats small {
-  color: #6b6b80;
-  font-size: 0.7rem;
+    color: rgba(216, 203, 179, 0.75);
+    font-size: 0.7rem;
 }
 
-.programs-title{
-  display: block;
-  font-size: 40px;
-  align-items: center;
-  font-weight: 550;
+/* =========================================================
+   PROGRAME
+   ========================================================= */
+.container-programs {
+    margin-top: 15px;
+}
+
+.programs-title {
+    display: block;
+    font-size: 40px;
+    align-items: center;
+    font-weight: 600;
+    color: var(--charcoal);
 }
 
 .programs-text {
-
     width: 400px;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--charcoal-soft);
     text-align: center;
     margin: 0 auto;
 }
 
-.container-next{
-  background-color: rgb(253, 248, 255);
-  display: flex;
-  align-items: center;
-  gap: 40px;
+/* =========================================================
+   SECTIUNEA "NEXT"
+   ========================================================= */
+.container-next {
+    background-color: var(--sand-light);
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
 
-.container-programs{
-  margin-top: 15px;
+.textul {
+    font-weight: 500;
+    display: block;
+    width: 550px;
+    text-align: left;
+    color: var(--charcoal-soft);
 }
 
-.textul{
-  font-weight: 500;
-  display: block;
-  width: 550px;
-  text-align: left;
+.h2text {
+    font-weight: 800;
+    font-size: 50px;
+    color: var(--charcoal);
 }
 
-.h2text{
-  font-weight: 750;
-  font-size: 50px;
-  color: #24175d;
+.hr-next {
+    width: 78px;
+    height: 4px;
+    background-color: var(--electric-blue);
+    border: none;
+    border-radius: 2px;
+    opacity: 1;
+    margin-bottom: 14px;
 }
 
-.hr-next{
-  width: 78px;
-  height: 3px;
-  background-color: rgb(159, 22, 152);
-  border: none;
-  margin-bottom: 14px;
+.number-next {
+    display: flex;
 }
 
-.number-next{
-  display: flex;
+.verical-line {
+    width: 2px;
+    height: 60px;
+    background-color: var(--sand);
+    margin-left: 30px;
+    margin-top: 18px;
+    margin-right: 30px;
 }
 
-.verical-line{
-  width: 3px;
-  height: 60px;
-  background-color: #7b7b7b;
-  margin-left: 30px;
-  margin-top: 18px;
-  margin-right: 30px;
+.text-next {
+    text-align: left;
 }
 
-.text-next{
-  text-align: left;
+.number {
+    display: block;
+    font-size: 50px;
+    font-weight: 700;
+    color: var(--electric-blue);
 }
 
-.number{
-  display: block;
-  font-size: 50px;
-  font-weight: 700;
-}
-.text-number{
-  display: block;
-  font-size: 15px;
-  font-weight: 100;
+.text-number {
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--charcoal-soft);
 }
 
-.next-img{
-  display: block;
-  width: 380px;
-  height: 400px;
-  margin-top: 40px;
-  margin-left: 45px;
-  object-fit: cover;
-  border-radius: 25px;
+.next-img {
+    display: block;
+    width: 380px;
+    height: 400px;
+    margin-top: 40px;
+    margin-left: 45px;
+    object-fit: cover;
+    border-radius: 25px;
+    border: 5px solid var(--sand);
 }
 
-.right-next{
-  display: block;
-  flex-direction: column;
-  margin-top: 20px;
+.right-next {
+    display: block;
+    flex-direction: column;
+    margin-top: 20px;
 }
 
-.container-cards{
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-  justify-content: center;
+/* =========================================================
+   CARDURI
+   ========================================================= */
+.container-cards {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
 }
 
-.card{
-  display: block;
-  background-color: white;
-  width: 350px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  height: 250px;
+.card,
+.mid-card {
+    display: block;
+    width: 350px;
+    height: 250px;
+    border-radius: 15px;
+    border: 1px solid var(--sand-soft);
+    box-shadow: 0 2px 8px rgba(30, 30, 28, 0.10);
+    transition: 0.2s ease;
 }
 
-.mid-card{
-  display: block;
-  background-color: rgb(253, 248, 255);
-  width: 350px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
-  border-radius: 15px;
-  height: 250px;
+.card {
+    background-color: #fff;
+}
 
+/* cardul din mijloc: charcoal, ca sa fie punctul de atentie */
+.mid-card {
+    background-color: var(--charcoal);
+    border-color: var(--charcoal);
+    color: var(--sand);
+}
+
+.mid-card .text-card {
+    color: var(--sand);
+}
+
+.mid-card .edu-card {
+    background-color: rgba(216, 203, 179, 0.15);
+}
+
+.mid-card .edu-svg-icon {
+    fill: var(--sand);
+}
+
+.card:hover,
+.mid-card:hover {
+    border-color: var(--electric-blue);
 }
 
 .edu-card {
-  width: 60px;
-  height: 60px;
-  background-color: #f3f0ff;
-  border-radius: 15px;
-  display: flex;
-  margin-top: 30px;
-  margin-left: 30px;
-  align-items: center;
-  justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--blue-tint);
+    border-radius: 15px;
+    display: flex;
+    margin-top: 30px;
+    margin-left: 30px;
+    align-items: center;
+    justify-content: center;
 }
 
 .edu-svg-icon {
-  fill: #0e1eff;
-  width: 36px;
-  height: 36px;
+    fill: var(--electric-blue);
+    width: 36px;
+    height: 36px;
 }
 
-.card-title{
-  display: flex;
-  justify-content: left;
-  margin-left: 30px;
-  margin-top: 10px;
+.card-title {
+    display: flex;
+    justify-content: left;
+    margin-left: 30px;
+    margin-top: 10px;
 }
 
-.text-card{
-  font-size: 25px;
-  font-weight: 650;
+.text-card {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--charcoal);
 }
 
-.card-text{
-  width: 300px;
-  margin-left: 30px;
-  text-align: left;
-  display: flex;
+.card-text {
+    width: 300px;
+    margin-left: 30px;
+    text-align: left;
+    display: flex;
+    color: var(--charcoal-soft);
 }
 
+.mid-card .card-text {
+    color: rgba(216, 203, 179, 0.8);
+}
+
+/* =========================================================
+   SECTIUNEA DE JOS
+   ========================================================= */
 .container-bottom {
-  margin-top: 30px;
-  position: relative;
-  min-height: 70vh;
-  text-align: left;
-  display: flex;
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
+    margin-top: 30px;
+    position: relative;
+    min-height: 70vh;
+    text-align: left;
+    display: flex;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
-.bottom-overlay{
+.bottom-overlay {
     position: absolute;
     inset: 0;
-   background: linear-gradient(
-    -90deg,
-    rgba(255, 255, 255, 0.68) 10%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0.2) 60%
-  );
+    background: linear-gradient(
+        -90deg,
+        rgba(243, 238, 227, 0.92) 10%,
+        rgba(243, 238, 227, 0.70) 50%,
+        rgba(243, 238, 227, 0.20) 60%
+    );
 }
 
 .left-bottom,
-.right-bottom{
-  min-width: 50%;
-  z-index: 1;
-  position: relative;
+.right-bottom {
+    min-width: 50%;
+    z-index: 1;
+    position: relative;
 }
 
-.right-bottom{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
+.right-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
 }
 
-.title-bottom{
-  color: #24175d;
-  font-size: 40px;
-  font-weight: 670;
+.title-bottom {
+    color: var(--charcoal);
+    font-size: 40px;
+    font-weight: 700;
 }
 
-.text{
-  display: block;
-  width: 450px;
+.bottom-text {
+    margin: 0 0 20px 0;
+    padding: 0;
 }
 
-.text-font{
-  font-size: 15px;
+.bottom-paragraph {
+    display: block;
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    text-align: left;
+    color: var(--charcoal-soft);
+}
+
+.text-font {
+    font-size: 15px;
+}
+
+/* =========================================================
+   MOBIL
+   (trebuie sa fie la final, ca sa suprascrie regulile de mai sus)
+   ========================================================= */
+@media (max-width: 991px) {
+    .arch-overlay {
+        background: rgba(243, 238, 227, 0.88);
+    }
+
+    .bottom-overlay {
+        background: rgba(243, 238, 227, 0.85);
+    }
+
+    .container-next {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .textul,
+    .text,
+    .programs-text {
+        width: 100%;
+    }
+
+    .next-img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .container-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-bottom {
+        display: none;
+    }
+
+    .right-bottom {
+        min-width: 100%;
+    }
 }

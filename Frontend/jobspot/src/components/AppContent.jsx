@@ -7,6 +7,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import FooterComponent from '../components/FooterComponet';
 import AuthPage from '../pages/AuthPage';
 import CreateInternship from '../pages/CreateInternship';
+import InternshipDetails from '../pages/InternshipDetails.jsx'
 
 function AppContent() {
     const location = useLocation();
@@ -14,9 +15,10 @@ function AppContent() {
     const isAuthPage =
         location.pathname === "/login" ||
         location.pathname === "/register";
+        const isHome = location.pathname === "/";
 
     return (
-        <div className="d-flex flex-column min-vh-100">
+        <div className={`d-flex flex-column min-vh-100 position-relative ${isHome ? "is-home" : ""}`}>
             <HeaderComponent />
 
             <div className="flex-grow-1">
@@ -25,7 +27,8 @@ function AppContent() {
                     <AuthPage />
                 ) : (
                     <Routes>
-                        <Route path="/home" element={<Home />} />
+                        <Route path='/infointernship' element={<InternshipDetails />}/>
+                        <Route path="/" element={<Home />} />
                         <Route path='/addintership' element = {<CreateInternship />} />
                         <Route path="/internship" element={<Internshipuri />} />
                         <Route path="/notificari" element={<Notificari />} />
