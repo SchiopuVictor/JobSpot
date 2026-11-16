@@ -1,15 +1,160 @@
-.btn-primary.hover-invert:hover {
-    background-color: #ffffff;
-    color: #0d6efd; 
-    border-color: #0d6efd;
+:root {
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
 }
 
 .header {
-    width: 100%;
+    position: relative;
+    padding: 16px 24px;
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
 }
 
-.navbar {
-    width: 1000px;
-    max-width: 95%;
-    margin-top: 15px;
+/* Pe Home stă peste imagine */
+.is-home .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 12px 10px 28px;
+    background-color: rgba(30, 30, 28, 0.88) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(216, 203, 179, 0.18);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Logo ---------- */
+.navbar-brand {
+    color: var(--sand);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+}
+
+.navbar-brand::after {
+    content: ".";
+    color: var(--electric-blue);
+}
+
+/* ---------- Taburi ---------- */
+.jobspot-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.jobspot-link {
+    display: block;
+    padding: 9px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    color: rgba(216, 203, 179, 0.85);
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    transition: 0.2s ease;
+}
+
+.jobspot-link:hover {
+    background-color: rgba(216, 203, 179, 0.14);
+    color: var(--sand);
+}
+
+.jobspot-link.active {
+    background-color: var(--electric-blue);
+    color: #fff;
+}
+
+/* ---------- Login / Sign Up ---------- */
+.log-regis {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.log-btn,
+.regi-btn,
+.log-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.log-btn {
+    background: transparent;
+    border: 1px solid var(--sand);
+    color: var(--sand);
+}
+
+.log-btn:hover {
+    background: var(--sand);
+    color: var(--charcoal);
+}
+
+.regi-btn {
+    background: var(--electric-blue);
+    border: 1px solid var(--electric-blue);
+    color: #fff;
+}
+
+.regi-btn:hover {
+    background: #fff;
+    border-color: #fff;
+    color: var(--electric-blue);
+}
+
+.log-out {
+    background: var(--sand);
+    border: 1px solid var(--sand);
+    color: var(--charcoal);
+}
+
+.log-out:hover {
+    background: var(--electric-blue);
+    border-color: var(--electric-blue);
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .header .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        border-radius: 28px;
+    }
+
+    .jobspot-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar-info {
+        width: 100%;
+    }
 }

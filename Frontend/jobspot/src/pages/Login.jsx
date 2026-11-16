@@ -18,7 +18,7 @@ function Login() {
             setAccessToken(response.data.token);
             setAuthToken(response.data.token);
 
-            navigate("/home");
+            navigate("/");
 
         } catch (error) {
             console.log(error);

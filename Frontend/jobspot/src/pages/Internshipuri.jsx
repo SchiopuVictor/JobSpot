@@ -1,18 +1,27 @@
 import '../styles/Internshipuri.css';
 import { useEffect, useState } from 'react';
 import black from '../assets/black.jpg';
-import { getImageUrl } from '../utils/imageUrl';
+import InternshipDetails from '../pages/InternshipDetails.jsx'
 import { jwtDecode } from 'jwt-decode';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; 
 import {getInternships} from '../config/internshipConfig.jsx';
 
 function Internshipuri() {
 
+const navigate = useNavigate();
 const [min, setMin] = useState(0);
 const [max, setMax] = useState(20000);
 const {accessToken} = useAuth();
 const [error,setErorr] = useState("");
+const colors = [
+    "#E8F5E9",
+    "#E3F2FD",
+    "#FCE4EC",
+    "#FFF3E0",
+    "#F3E5F5",
+    "#E0F7FA"
+];
 
 const decodeToken = accessToken ? jwtDecode(accessToken) : null;
 
@@ -24,8 +33,6 @@ const [allInternships,setAllInternships] = useState([]);
     async function fetchInternships() {
     try{
         const response = await getInternships();
-        console.log("imgUrl:", response.data[0].imgUrl);
-console.log(JSON.stringify(response.data[0]));
         setAllInternships(response.data);
     
     }catch(error){
@@ -168,12 +175,12 @@ console.log(JSON.stringify(response.data[0]));
                         {
                             decodeToken?.role !== "Company" ? 
                         (
-                            <Link to ="/">
+                            <Link className='moreInfo' to ="/">
                                 Learn more
                             </Link>
                         ):
                             (
-                            <Link to ="/addintership">
+                            <Link className='' to ="/addintership">
                                 Add Internship
                             </Link> 
                             )
@@ -239,7 +246,7 @@ console.log(JSON.stringify(response.data[0]));
                         <div className='title-container'>
                             <div className='right-text'>
                                 <h2>Recommanded jobs</h2>
-                                <label>386</label>
+                                <label>{allInternships.length}</label>
                             </div>
                             <div className='sort-by'>
                                 <h2>Sort by: </h2>
@@ -255,7 +262,9 @@ console.log(JSON.stringify(response.data[0]));
                                 allInternships.map((intern) => {
                                     return (
                                         <div className='internship-card' key={intern.id}>
-                                           <div className='top-card'>
+                                           <div className='top-card'
+                                                style={{backgroundColor:colors[Math.floor(Math.random() * colors.length)]}}
+                                                >
                                                 <div className='text-card'>
                                                     <div className='informa-left'>
                                                         <label>{intern.createdAt}</label>
@@ -271,7 +280,9 @@ console.log(JSON.stringify(response.data[0]));
                                                                 </path> 
                                                             </g>
                                                         </svg>
-                                                        <img  src={intern.imgUrl
+                                                        <img  
+                                                            className='img-url'
+                                                            src={intern.imgUrl
                                                                 ? `http://localhost:8080${intern.imgUrl}`
                                                                 : "/default-logo.png"}
                                                              alt={intern.companyName} />
@@ -299,7 +310,7 @@ console.log(JSON.stringify(response.data[0]));
                                                     <h4>{intern.location}</h4>
                                                 </div>
                                                 <div className='detail-btn'>
-                                                    <button>
+                                                    <button onClick={()=>navigate("/infointernship")}>
                                                         Details
                                                     </button>
                                                 </div>

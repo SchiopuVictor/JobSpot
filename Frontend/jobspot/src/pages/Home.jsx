@@ -210,7 +210,7 @@ function Home() {
                 </div>
                 
                 <div className="bottom-text">
-                    <p className="text">
+                    <p className="bottom-paragraph">
                         Discover exciting internship opportunities,
                         gain real-world experience, develop valuable skills,
                         and connect with companies that can help shape your professional future...

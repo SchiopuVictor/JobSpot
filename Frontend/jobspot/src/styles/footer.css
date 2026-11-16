@@ -1,0 +1,134 @@
+:root {
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
+}
+
+/* ---------- Containerul footer-ului ---------- */
+.footer-container {
+    background-color: var(--charcoal);
+    color: var(--sand);
+    padding: 64px 0 32px;
+}
+
+/* ---------- Brand ---------- */
+.footer-brand {
+    display: block;     /* îl face element block */
+    text-align: left;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--sand);
+    letter-spacing: 0.3px;
+    text-decoration: none;
+}
+
+/* punctul albastru, la fel ca in navbar */
+.footer-brand::after {
+    content: ".";
+    color: var(--electric-blue);
+}
+
+.footer-description {
+    max-width: 360px;
+    margin-top: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(216, 203, 179, 0.7);
+}
+
+/* ---------- Titluri coloane ---------- */
+.footer-heading {
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(216, 203, 179, 0.55);
+}
+
+/* ---------- Linkuri ---------- */
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-link {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--sand);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--electric-blue);
+    transform: translateX(3px);
+}
+
+/* ---------- Bara de jos (pastila) ---------- */
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 48px;
+    padding: 14px 24px;
+    background-color: rgba(216, 203, 179, 0.08);
+    border: 1px solid rgba(216, 203, 179, 0.18);
+    border-radius: 999px;
+}
+
+.footer-copy {
+    font-size: 14px;
+    color: rgba(216, 203, 179, 0.7);
+}
+
+/* ---------- Iconite sociale ---------- */
+.footer-social {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--sand);
+    color: var(--charcoal);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.footer-social-btn:hover {
+    background-color: var(--electric-blue);
+    color: #fff;
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 768px) {
+    .footer-bottom {
+        flex-direction: row;
+    }
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 767px) {
+    .footer-bottom {
+        border-radius: 28px;
+        padding: 18px;
+    }
+}
