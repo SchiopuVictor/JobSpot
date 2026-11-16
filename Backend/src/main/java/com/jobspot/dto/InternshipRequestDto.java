@@ -16,8 +16,9 @@ public class InternshipRequestDto {
     private String responsibilities;
     private String location;
     private InternshipType type;
-    private LocalDate duration;
-    private String availablePositions;
+    private String duration;
+    private String working_schedule;
+    private String imgUrl;
     private BigDecimal salary;
     private LocalDate applicationDeadline;
     private InternshipStatus status;

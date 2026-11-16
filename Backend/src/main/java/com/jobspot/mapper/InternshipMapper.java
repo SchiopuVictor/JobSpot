@@ -8,8 +8,10 @@ public class InternshipMapper {
 
     public static InternshipResponseDto toDto(Internship internship){
         return InternshipResponseDto.builder()
+                .id(internship.getId())
                 .companyName(internship.getCompany().getCompanyName())
-                .availablePositions(internship.getAvailablePositions())
+                .working_schedule(internship.getRequirements())
+                .imgUrl(internship.getImageUrl())
                 .applicationDeadline(internship.getApplicationDeadline())
                 .createdAt(internship.getCreatedAt())
                 .description(internship.getDescription())
@@ -28,7 +30,8 @@ public class InternshipMapper {
         return Internship.builder()
                 .applicationDeadline(request.getApplicationDeadline())
                 .status(request.getStatus())
-                .availablePositions(request.getAvailablePositions())
+                .imageUrl(request.getImgUrl())
+                .workingSchedule(request.getWorking_schedule())
                 .description(request.getDescription())
                 .duration(request.getDuration())
                 .location(request.getLocation())

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class InternshipResponseDto {
-
+    private long id;
     private String companyName;
     private String title;
     private String description;
@@ -24,10 +24,11 @@ public class InternshipResponseDto {
     private String responsibilities;
     private String location;
     private InternshipType type;
-    private LocalDate duration;
-    private String availablePositions;
+    private String duration;
+    private String working_schedule;
     private BigDecimal salary;
     private LocalDate applicationDeadline;
+    private String imgUrl;
     private LocalDate createdAt;
     private InternshipStatus status;
 }

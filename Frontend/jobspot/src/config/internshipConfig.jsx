@@ -1,6 +1,22 @@
 import axios from "axios";
 import api from "./axiosConfig";
 
-export function postInternship(data){
-    return api.post(`/internship`,data);
+export async function postInternship(formData) {
+    const { imgUrl, ...internshipData } = formData; 
+
+    const data = new FormData();
+    data.append(
+        "internship",
+        new Blob([JSON.stringify(internshipData)], { type: "application/json" })
+    );
+
+    if (imgUrl) {
+        data.append("image", imgUrl); 
+    }
+
+    return api.post("/internship", data);
+}
+
+export function getInternships(){
+    return api.get(`/internship/all`);
 }

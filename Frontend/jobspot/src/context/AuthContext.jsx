@@ -12,7 +12,7 @@ export function AuthProvider({children}){
     }
 
     useEffect(()=>{
-        setAccessToken(accessToken);
+        setAuthToken(accessToken);
 
     },[accessToken]);
 

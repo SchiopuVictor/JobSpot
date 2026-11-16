@@ -1,17 +1,18 @@
 import axios from "axios";
+import api from "./axiosConfig";
 
 const url = "http://localhost:8080/api";
 
-function postStudent (data){
+export function postStudent (data){
     return(axios.post(`${url}/student`,data));
 }
 
-function registerUser(data){
+export function registerUser(data){
     return(axios.post(`${url}/users`,data));
 }
 
-function postCompany(data){
+export function postCompany(data){
     return(axios.post(`${url}/company`,data));
 }
 
-export {postStudent,registerUser,postCompany};
+

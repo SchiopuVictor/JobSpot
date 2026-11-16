@@ -362,3 +362,171 @@ body {
 
 /* GRILA DE CARDURI */
 
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* Card principal */
+.internship-card {
+    width: 100%;
+    max-width: 260px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.internship-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Partea superioară */
+.top-card {
+    background-color: #ffe2ce;
+    border-radius: 15px;
+    padding: 15px;
+    min-height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Informațiile companiei și internshipului */
+.text-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.informa-left {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.informa-left label {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 5px 9px;
+    font-size: 10px;
+    color: #444;
+    width: fit-content;
+    margin-bottom: 8px;
+}
+
+.informa-left h4 {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0;
+    color: #444;
+}
+
+.informa-left h2 {
+    font-size: 18px;
+    line-height: 1.15;
+    font-weight: 600;
+    margin: 0;
+    color: #222;
+    overflow-wrap: anywhere;
+}
+
+/* Logo și bookmark */
+.informa-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.informa-right svg {
+    width: 24px;
+    height: 24px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+.informa-right img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* Categoriile internshipului */
+.info-part {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 12px;
+}
+
+.info-part label {
+    border: 1px solid rgba(80, 65, 55, 0.2);
+    border-radius: 20px;
+    padding: 5px 9px;
+    font-size: 9px;
+    color: #444;
+    white-space: nowrap;
+}
+
+/* Partea inferioară */
+.down-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 7px 3px;
+    gap: 8px;
+}
+
+.plata {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+}
+
+.plata h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: #222;
+}
+
+.plata h4 {
+    font-size: 10px;
+    font-weight: 400;
+    color: #888;
+    margin: 0;
+}
+
+/* Buton Details */
+.detail-btn button {
+    background-color: #111;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 9px 17px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.detail-btn button:hover {
+    background-color: #444;
+}

@@ -1,16 +1,38 @@
 import '../styles/Internshipuri.css';
-import Hero from '../assets/hearo.jpg';
-import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import black from '../assets/black.jpg';
-
+import { getImageUrl } from '../utils/imageUrl';
+import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContext"; 
+import {getInternships} from '../config/internshipConfig.jsx';
 
 function Internshipuri() {
 
-const [min, setMin] = useState(20);
-const [max, setMax] = useState(80);
+const [min, setMin] = useState(0);
+const [max, setMax] = useState(20000);
+const {accessToken} = useAuth();
+const [error,setErorr] = useState("");
+
+const decodeToken = accessToken ? jwtDecode(accessToken) : null;
+
+const [allInternships,setAllInternships] = useState([]);
+
+ useEffect(()=>
+    {
+    
+    async function fetchInternships() {
+    try{
+        const response = await getInternships();
+        console.log("imgUrl:", response.data[0].imgUrl);
+console.log(JSON.stringify(response.data[0]));
+        setAllInternships(response.data);
+    
+    }catch(error){
+        console.log(error?.response?.data?.mesagge || "incarcarea internshipurilor a iesuat!!");
+    }}
+        fetchInternships();
+    },[]);
 
     return (
         <div className='page'>
@@ -130,7 +152,7 @@ const [max, setMax] = useState(80);
                         <input
                             type="range"
                             min="0"
-                            max="100"
+                            max="20000"
                             value={max}
                             onChange={(e) => setMax(Math.max(Number(e.target.value), min))}
                         />
@@ -142,14 +164,26 @@ const [max, setMax] = useState(80);
                 <aside className='left-container'>
                     <div className='card-filter' style={{backgroundImage:`url(${black})`}}>
                         <h2>Get your best profesion with SpotJob</h2>
-                        <Link to ="/addintership">
-                            Learn more
-                        </Link>
+
+                        {
+                            decodeToken?.role !== "Company" ? 
+                        (
+                            <Link to ="/">
+                                Learn more
+                            </Link>
+                        ):
+                            (
+                            <Link to ="/addintership">
+                                Add Internship
+                            </Link> 
+                            )
+                        }
+                        
                     </div>
                     <div className='filter-part'>
                         <div className='filter-title'>
                             <h2>Filter</h2>
-                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://w3.org" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 19l-7-7 7-7"></path>
                             </svg>
                         </div>
@@ -217,7 +251,64 @@ const [max, setMax] = useState(80);
                         </div> 
 
                         <div className='jobs-grid'>
-                            
+                            {
+                                allInternships.map((intern) => {
+                                    return (
+                                        <div className='internship-card' key={intern.id}>
+                                           <div className='top-card'>
+                                                <div className='text-card'>
+                                                    <div className='informa-left'>
+                                                        <label>{intern.createdAt}</label>
+                                                        <h4>{intern.title}</h4>
+                                                        <h2>{intern.companyName}</h2>
+                                                    </div> 
+                                                    <div className='informa-right'>
+                                                        <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier"> 
+                                                                <path fillRule="evenodd" clipRule="evenodd" d="M6.85665 2.30447C8.2922 2.16896 10.3981 2 12 2C13.6019 2 15.7078 2.16896 17.1433 2.30447C18.4976 2.4323 19.549 3.51015 19.6498 4.85178C19.7924 6.74918 20 9.90785 20 12.2367C20 14.022 19.8781 16.2915 19.7575 18.1035C19.697 19.0119 19.6365 19.8097 19.5911 20.3806C19.5685 20.6661 19.5496 20.8949 19.5363 21.0526L19.5209 21.234L19.5154 21.2966L19.5153 21.2976C19.5153 21.2977 19.5153 21.2977 18.7441 21.2308L19.5153 21.2976C19.4927 21.5553 19.3412 21.7845 19.1122 21.9075C18.8831 22.0305 18.6072 22.0309 18.3779 21.9085L12.1221 18.5713C12.0458 18.5307 11.9542 18.5307 11.8779 18.5713L5.62213 21.9085C5.39277 22.0309 5.11687 22.0305 4.88784 21.9075C4.65881 21.7845 4.50732 21.5554 4.48466 21.2977L5.25591 21.2308C4.48466 21.2977 4.48467 21.2978 4.48466 21.2977L4.47913 21.234L4.46371 21.0526C4.45045 20.8949 4.43154 20.6661 4.40885 20.3806C4.3635 19.8097 4.30303 19.0119 4.24255 18.1035C4.12191 16.2915 4 14.022 4 12.2367C4 9.90785 4.20763 6.74918 4.3502 4.85178C4.45102 3.51015 5.50236 2.4323 6.85665 2.30447ZM5.93179 19.9971L11.1455 17.2159C11.6791 16.9312 12.3209 16.9312 12.8545 17.2159L18.0682 19.9971C18.1101 19.4598 18.1613 18.7707 18.2124 18.0019C18.3327 16.1962 18.4516 13.9687 18.4516 12.2367C18.4516 9.97099 18.2482 6.86326 18.1057 4.96632C18.0606 4.366 17.5938 3.89237 16.9969 3.83603C15.5651 3.70088 13.5225 3.53846 12 3.53846C10.4775 3.53846 8.43487 3.70088 7.00309 3.83603C6.40624 3.89237 5.9394 4.366 5.89429 4.96632C5.75175 6.86326 5.54839 9.97099 5.54839 12.2367C5.54839 13.9687 5.66734 16.1962 5.78756 18.0019C5.83874 18.7707 5.88993 19.4598 5.93179 19.9971Z" fill="#000000">
+                                                                </path> 
+                                                            </g>
+                                                        </svg>
+                                                        <img  src={intern.imgUrl
+                                                                ? `http://localhost:8080${intern.imgUrl}`
+                                                                : "/default-logo.png"}
+                                                             alt={intern.companyName} />
+                                                    </div>
+
+                                                </div>
+                                                <div className='info-part'>
+                                                    <label>
+                                                        {intern.type}
+                                                    </label>
+                                                    <label>
+                                                        {intern.working_schedule}
+                                                    </label>
+                                                    <label>
+                                                        {intern.duration}
+                                                    </label>
+                                                    <label>
+                                                        {intern.status}
+                                                    </label>
+                                                </div>
+                                            </div> 
+                                            <div className='down-card'>
+                                                <div className='plata'>
+                                                    <h3>${intern.salary}/month</h3>
+                                                    <h4>{intern.location}</h4>
+                                                </div>
+                                                <div className='detail-btn'>
+                                                    <button>
+                                                        Details
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        );
+                                    }
+                                )
+                            }
                         </div>
                     </section>
             </div>

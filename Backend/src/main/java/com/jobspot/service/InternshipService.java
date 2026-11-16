@@ -12,9 +12,15 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,8 +28,13 @@ public class InternshipService {
     private final InternshipRepository internshipRepository;
     private final CompanyRepository companyRepository;
 
+    public List<Internship> getAllInternships(){
+        return  internshipRepository.findAll();
+    }
+
     @Transactional
-    public Internship createInternship(InternshipRequestDto request){
+    public Internship createInternship(InternshipRequestDto request,
+                                       MultipartFile file){
 
         Object principal = SecurityContextHolder
                 .getContext()
@@ -40,6 +51,31 @@ public class InternshipService {
 
         internship.setCreatedAt(LocalDate.now());
         internship.setCompany(company);
+
+        try{
+
+            if( file != null && !file.isEmpty()) {
+
+                Path uploadPath = Paths.get("uploads/internships");
+
+                Files.createDirectories(uploadPath);
+
+                String extensions = Objects.requireNonNull(file.getOriginalFilename())
+                        .substring(file.getOriginalFilename().lastIndexOf("."));
+
+                String fileName = UUID.randomUUID() + extensions;
+
+                Path filePath = uploadPath.resolve(fileName);
+
+                Files.copy(file.getInputStream(), filePath);
+
+                String imgUrl = "/uploads/internships/" + fileName;
+
+                internship.setImageUrl(imgUrl);
+            }
+        }catch (Exception e){
+            throw new RuntimeException("Error image upload", e);
+        }
 
         return internshipRepository.save(internship);
     }
@@ -67,6 +103,7 @@ public class InternshipService {
         internship.setCompany(company);
         internship.setDescription(request.getDescription());
         internship.setDuration(request.getDuration());
+        internship.setImageUrl(request.getImgUrl());
         internship.setRequirements(request.getRequirements());
         internship.setResponsibilities(request.getResponsibilities());
         internship.setSalary(request.getSalary());
@@ -76,8 +113,7 @@ public class InternshipService {
         internship.setTitle(request.getTitle());
         internship.setLocation(request.getLocation());
         internship.setApplicationDeadline(request.getApplicationDeadline());
-        internship.setAvailablePositions(request.getAvailablePositions());
-
+        internship.setWorkingSchedule(request.getWorking_schedule());
         return internshipRepository.save(internship);
     }
 
