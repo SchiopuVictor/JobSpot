@@ -20,10 +20,11 @@ function CreateInternship(){
             location:"",
             type:"",
             duration:"",
-            availablePositions:"",
+            working_schedule:"",
             salary:"",
             applicationDeadline:"",
-            status:""
+            status:"",
+            imgUrl:""
         }
     );
     
@@ -31,15 +32,14 @@ function CreateInternship(){
         e.preventDefault()
         try{
 
-            const decodeToken = jwtDecode(accessToken);
-            const companyId = decodeToken.sub;
-
-            const response = await postInternship({...formData,company_id: companyId});
+            await postInternship(formData);
             navigate('/internship');
 
         }catch(error){
-            setErorr(error.response?.data?.message || "A aparut o problema la conectare cu backend-ul"
-            )
+            setErorr(
+                 error.response?.data?.message || 
+                "A aparut o problema la conectare cu backend-ul"
+            );
         }
     };
 
@@ -108,10 +108,10 @@ function CreateInternship(){
                                 onChange={(e)=>setFormData({...formData, duration: e.target.value})}
                             />
                             <input type="text" 
-                                placeholder="Available Position"
+                                placeholder="Working Schedule"
                                 className="intput-feald"
-                                value={formData.availablePositions}
-                                onChange={(e)=>setFormData({...formData, availablePositions: e.target.value})}
+                                value={formData.working_schedule}
+                                onChange={(e)=>setFormData({...formData, working_schedule: e.target.value})}
                             />
 
                             <input type="text"
@@ -143,6 +143,13 @@ function CreateInternship(){
                                 className="intput-feald full-width"
                                 value={formData.description}
                                 onChange={(e)=>setFormData({...formData, description: e.target.value})}
+                            />
+
+                            <input type="file"
+                                placeholder="Company Image"
+                                accept="image/*"
+                                className="intput-feald"
+                                onChange={(e)=>setFormData({...formData, imgUrl: e.target.files[0]})}
                             />
 
                             <div>

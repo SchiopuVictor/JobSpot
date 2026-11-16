@@ -48,10 +48,10 @@ public class Internship {
     private InternshipType type;
 
     @Column(name = "duration")
-    private LocalDate duration;
+    private String duration;
 
-    @Column(name = "available_positions")
-    private String availablePositions;
+    @Column(name = "working_schedule")
+    private String workingSchedule;
 
     @Column(name = "salary")
     private BigDecimal salary;
@@ -65,6 +65,9 @@ public class Internship {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private InternshipStatus status;
+
+    @Column(name="img_url")
+    private String imageUrl;
 
     @OneToMany
     @JoinColumn(name = "internship_id")

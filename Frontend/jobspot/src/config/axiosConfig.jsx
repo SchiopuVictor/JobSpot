@@ -36,13 +36,15 @@ const api = axios.create(
     });
 
     api.interceptors.response.use(
-        response=>response,
+        response=>
+            response,
         async (error) =>{
             const originalRequest = error.config;
             
             if(error.response?.status===401 &&
                 !originalRequest._retry && 
-                !originalRequest.url?.includes("/auth/refresh")
+                !originalRequest.url?.includes("/auth/refresh") &&
+                !originalRequest.url?.includes("/auth/login") 
             ){
                 if(isRefreshing){
                     return new Promise((resolve, reject)=>{
@@ -56,7 +58,7 @@ const api = axios.create(
                 isRefreshing = true;
                 try{
                     const response = await api.post("/auth/refresh");
-                    const newToken = response.data.accessToken;
+                    const newToken = response.data.token;
                     setAuthToken(newToken);
                     processQueue(null, newToken);
                     originalRequest.headers.Authorization = `Bearer ${newToken}`;
@@ -67,7 +69,7 @@ const api = axios.create(
                     processQueue(refreshEror,null);
                     setAuthToken(null);
                     
-                    window.dispatchEvent(new Event("auht:logout"));
+                    window.dispatchEvent(new Event("auth:logout"));
 
                     return Promise.reject(refreshEror);
                 }finally{

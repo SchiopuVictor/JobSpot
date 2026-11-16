@@ -63,18 +63,25 @@ public class SecurityConfig {
             .sessionManagement(c->
                 c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(c-> c
-                    .requestMatchers(HttpMethod.POST,"/api/auth/login").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/api/users").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/api/company").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/api/student").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/api/internship").hasRole(Role.Company.name())
-                    .requestMatchers(
-                            "/swagger-ui/**",
-                            "/swagger-ui.html",
-                            "/v3/api-docs/**"
-                    ).permitAll()
-                    .anyRequest().authenticated())
+                .authorizeHttpRequests(c -> c
+                        .requestMatchers("/uploads/**", "/error").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/company").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/student").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/internship/all").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/internship")
+                        .hasRole(Role.Company.name())
+
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+
+                        .anyRequest().authenticated()
+                )
                 .exceptionHandling(c->{
                     c.authenticationEntryPoint(
                             new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));

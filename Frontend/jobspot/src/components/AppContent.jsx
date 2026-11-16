@@ -25,7 +25,7 @@ function AppContent() {
                     <AuthPage />
                 ) : (
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
                         <Route path='/addintership' element = {<CreateInternship />} />
                         <Route path="/internship" element={<Internshipuri />} />
                         <Route path="/notificari" element={<Notificari />} />
