@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @Builder
 public class InternshipResponseDto {
     private long id;
+    private long company_id;
     private String companyName;
     private String title;
     private String description;
