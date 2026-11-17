@@ -4,10 +4,11 @@
     --electric-blue: #2F6BFF;
 }
 
+
 .header {
     position: relative;
     padding: 16px 24px;
-    background-color: transparent !important;
+    background-color: transparent;
     border: none;
     box-shadow: none;
 }

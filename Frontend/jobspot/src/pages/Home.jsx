@@ -1,12 +1,38 @@
 import "../styles/Home.css"
 import CARD_IMAGE2 from "../assets/wes-hicks-4-EeTnaC1S4-unsplash.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const BG_IMAGE =
     "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80";
 const CARD_IMAGE =
     "https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80";
+
+
+
+function Counter({ finalNumber }) {
+    const [number, setNumber] = useState(1);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNumber(prev => {
+                if (prev >= finalNumber) {
+                    clearInterval(interval);
+                    return prev;
+                }
+
+                return prev + 1;
+            });
+        }, 50);
+
+        return () => clearInterval(interval);
+    }, [finalNumber]);
+
+    return <>{number}</>;
+}
+
 function Home() {
+   
     return (
     <div>
         <div className="top-container" style={{ backgroundImage: `url(${BG_IMAGE})` }}>
@@ -46,11 +72,11 @@ function Home() {
 
                             <div className="arch-stats">
                                 <div>
-                                    <strong>10K+</strong>
+                                    <strong><Counter finalNumber={10}/>K+</strong>
                                     <small>Students applayed</small>
                                 </div>
                                 <div>
-                                    <strong>96%</strong>
+                                    <strong><Counter finalNumber={96}/>%</strong>
                                     <small>Application Sent</small>
                                 </div>
                             </div>
@@ -86,7 +112,7 @@ function Home() {
                 <div className="number-next">
                     <div className="number-left">
                         <div>
-                            <h1 className="number" >120+</h1>
+                            <h1 className="number" ><Counter finalNumber={120}/>+</h1>
                         </div>
                         <div>
                             <h3 className="text-number">Companyes</h3>
@@ -98,7 +124,7 @@ function Home() {
                     <div className="number-right">
 
                         <div>
-                            <h1 className="number">35+</h1>
+                            <h1 className="number"><Counter finalNumber={35}/>+</h1>
                         </div>
                         <div>
                             <h3 className="text-number">Internships</h3>

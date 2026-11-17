@@ -1,537 +1,514 @@
-#root {
-    background-color: rgb(255, 255, 255);
+:root {
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
+
+    --sand-light: #F3EEE3;
+    --sand-soft: #E9E0CF;
+    --charcoal-soft: #55524B;
+    --blue-tint: #E6EDFF;
 }
 
-body {
-    margin: 0;
+#root{
+ background-color: var(--sand-light);   
 }
 
-.page {
-    margin-top: 130px;
+.int-page {
     width: 100%;
-    height: auto;
+    min-height: 100vh;
+    padding: 24px 24px 64px;
+    background-color: var(--sand-light);
+    color: var(--charcoal);
+    text-align: left;
 }
 
-.filter {
-    display: flex;
-    flex-direction: column;
-}
-
-.search {
-    height: 100px;
+/* =========================================================
+   BARA DE CAUTARE
+   ========================================================= */
+.int-search {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    background-color: #111;
-    padding: 15px 40px;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 14px 18px;
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 14px 28px;
+    background-color: #fff;
+    border: 1px solid var(--sand-soft);
+    border-radius: 32px;
+    box-shadow: 0 8px 24px rgba(30, 30, 28, 0.08);
 }
 
-.search > div:not(.seatch-salari-range) {
+.int-search-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    white-space: nowrap;
-    flex: 1;
-    min-width: 0;
-    height: 35px;
+    color: var(--charcoal);
 }
 
-.vertical-hr {
-    border: none;
-    border-left: 1px solid #bebebe;
-    height: 30px;
-    margin: 0;
-}
-
-.seatch-salari-range {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-    min-width: 180px;
-}
-
-.btn-icon,
-.point-search,
-.money-icon,
-.experience-icon {
-    height: 32px;
-    width: 32px;
-    min-width: 32px; 
-    min-height: 32px;
-    padding: 5px; 
-    border-radius: 50%;
-    box-sizing: border-box;
-    border: 1px solid #fff;
-    fill: white;     
-    stroke: white;   
-    margin-left: 10px;
-}
-
-.seatch-salari-range .upper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    color: #fff;
-    font-size: 14px;
-}
-
-.seatch-salari-range .upper h3 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: normal;
-    white-space: nowrap;
-}
-
-.seatch-salari-range .upper-right {
-    white-space: nowrap;
-}
-
-
-.search select {
-    background: transparent;
-    border: none;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-    cursor: pointer;
-    min-width: 0;
-}
-
-.search select option {
-    background-color: #222;
-    color: #fff;
-}
-
-.search svg {
+.int-icon {
     width: 20px;
     height: 20px;
-    fill: #fff;
     flex-shrink: 0;
+    color: var(--electric-blue);
 }
 
-.down {
+.int-search select,
+.int-sort select {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--charcoal);
+    cursor: pointer;
+}
+
+.int-search select:focus-visible,
+.int-sort select:focus-visible {
+    outline: 2px solid var(--electric-blue);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.int-divider {
+    width: 1px;
+    height: 28px;
+    background-color: var(--sand);
+}
+
+/* ---------- Slider de salariu ---------- */
+.int-range {
+    flex: 1;
+    min-width: 220px;
+}
+
+.int-range-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.int-range-head h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal-soft);
+}
+
+.int-range-head span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--electric-blue);
+}
+
+.int-range-slider {
     position: relative;
-    width: 200px;
-    height: 6px;
+    height: 20px;
 }
 
-.slider-track {
+.int-range-track {
     position: absolute;
-    width: 100%;
-    height: 6px;
     top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 2px;
     transform: translateY(-50%);
-    border-radius: 10px;
 }
 
-.down input {
+/* cele doua input-uri sunt suprapuse; doar buton-ul (thumb) primeste click */
+.int-range-slider input[type="range"] {
     position: absolute;
-    width: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 20px;
     margin: 0;
-    appearance: none;
-    -webkit-appearance: none;
     background: transparent;
     pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.down input::-webkit-slider-runnable-track {
-    height: 6px;
+.int-range-slider input[type="range"]::-webkit-slider-runnable-track {
     background: transparent;
 }
 
-.down input::-webkit-slider-thumb {
-    appearance: none;
+.int-range-slider input[type="range"]::-moz-range-track {
+    background: transparent;
+}
+
+.int-range-slider input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    margin-top: -6px;
-    border-radius: 50%;
-    background: #2563eb;
-    border: 2px solid white;
-    cursor: pointer;
     pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--electric-blue);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(30, 30, 28, 0.3);
+    cursor: pointer;
+}
+
+.int-range-slider input[type="range"]::-moz-range-thumb {
+    pointer-events: auto;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--electric-blue);
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(30, 30, 28, 0.3);
+    cursor: pointer;
+}
+
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ========================================================= */
+.int-main {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* =========================================================
+   COLOANA DIN STANGA
+   ========================================================= */
+.int-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.int-promo {
     position: relative;
-}
-
-.main-container {
-    margin: 20px auto 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 30px;
-    width: 90%;
+    gap: 18px;
+    padding: 28px 24px;
+    border-radius: 24px;
+    background-color: var(--charcoal);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    isolation: isolate;
 }
 
-.left-container {
+/* strat charcoal peste poza, ca textul sa se citeasca */
+.int-promo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(30, 30, 28, 0.78);
+}
+
+.int-promo h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--sand);
+}
+
+.int-promo-link {
+    padding: 10px 22px;
+    border-radius: 999px;
+    background-color: var(--electric-blue);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.int-promo-link:hover {
+    background-color: var(--sand);
+    color: var(--charcoal);
+}
+
+/* ---------- Filtre ---------- */
+.int-filter {
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid var(--sand-soft);
+    border-radius: 24px;
+}
+
+.int-filter-head h2 {
+    margin: 0 0 18px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.int-filter-group {
     display: flex;
     flex-direction: column;
-    width: 240px;
-    flex-shrink: 0;
+    gap: 10px;
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid var(--sand-soft);
 }
 
-.right-container {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
+.int-filter-group:first-of-type {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
 }
 
-.title-container{
+.int-filter-group h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.int-filter-option {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--charcoal-soft);
+    cursor: pointer;
+}
+
+.int-filter-option input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--electric-blue);
+    cursor: pointer;
+}
+
+.int-results-head {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 20px;
 }
 
-.card-filter {
-    display: flex;
-    flex-direction: column;
-    width: 220px;
-    height: 240px;
-    padding: 20px;
-    border-radius: 15px;
-    gap: 10px;
-    text-align: left;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    justify-content: center;  
-    align-items: center;  
-}
-
-.card-filter h2 { 
-    width: 85%;
-    height: auto; 
-    justify-content: center;
-    color: #fff;
-    font-size: 25px; 
-    font-weight: 600;
-    line-height: 1.3; 
-}
-
-.moreInfo{
-    border-radius: 10px;
-    border: none;
-    
-    text-align: center;
-    text-decoration: none;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    height: 30px;
-    font-size: 16px;
-    margin-top: 20px;
-    background-color: #acc0ed;
-    color: #111;
-}
-.filter-part{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin-right: auto;
-    align-items: flex-start;
-}
-
-
-.filter-title{
-    display: flex;
-    flex-direction: row;
-    gap: 120px;
-    align-items: center;    
-}
-
-.filter-title h2{
-    font-size: 25px;
-    font-weight: 500;
-}
-
-.filter-group{
-    display: flex;
-    flex-direction: column;
-    align-items:flex-start;
-}
-
-.filter-group h2 {
-    font-size: 15px;
-    font-weight: 300;
-    margin: 8px 0;
-    color: #888;
-}
-
-.filter-option {
+.int-results-title {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-.filter-option label{
-    font-size: 15px;
-    font-weight: 300;
-    color: #111;
-    margin: 8px 0;
+.int-results-title h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
 }
 
-.filter-option input {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    border: 1px solid #888;
-    border-radius: 4px;
-    cursor: pointer;
-    display: grid;
-    place-content: center;
-}
-
-.filter-option input:checked {
-    background-color: #111;
-    border-color: #111;
-}
-
-.filter-option input:checked::after {
-    content: "✓";
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.right-text{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-}
-
-
-.right-text h2 { margin: 0; font-size: 28px; }
-
-.right-text label {
-    padding: 8px 16px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-}
-
-.sort-by {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-}
-
-.sort-by h2 { 
-    margin: 0; 
-    font-size: 14px; 
-    font-weight: 400;
-    color: #000000; 
-}
-
-.sort-by select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    border: none;
-    background-color: transparent;
+.int-count {
+    padding: 2px 12px;
+    border-radius: 999px;
+    background-color: var(--charcoal);
+    color: var(--sand);
     font-size: 14px;
-    font-weight: 500;
-    color: #111;
-    cursor: pointer;
-    outline: none;
-
-    padding: 4px 36px 4px 4px;
-
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='3' y1='8' x2='21' y2='8'/%3E%3Cline x1='3' y1='16' x2='21' y2='16'/%3E%3Ccircle cx='9' cy='8' r='2.5' fill='%23fff'/%3E%3Ccircle cx='15' cy='16' r='2.5' fill='%23fff'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 4px center;
-    background-size: 24px 24px;
+    font-weight: 700;
 }
 
-.sort-icon {
-    width: 24px;
-    height: 24px;
-    color: #111;
-    cursor: pointer;
-    margin-left: 8px;
-}
-
-/* GRILA DE CARDURI */
-
-
-.jobs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 25px;
-    padding: 20px 0;
-}
-
-/* Card principal */
-.internship-card {
-    width: 100%;
-    max-width: 260px;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #dedede;
-    border-radius: 20px;
-    box-sizing: border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.internship-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* Partea superioară */
-.top-card {
-    border-radius: 15px;
-    padding: 15px;
-    min-height: 185px;
+.int-sort {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Informațiile companiei și internshipului */
-.text-card {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--charcoal-soft);
 }
 
-.informa-left {
-    text-align: left;
+.int-error {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background-color: #fff;
+    border: 1px solid var(--electric-blue);
+    color: var(--charcoal);
+    font-size: 14px;
+}
+
+.int-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.int-card {
+    display: flex;
+    width: 340px;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid var(--sand-soft);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.int-card:hover {
+    border-color: var(--electric-blue);
+    box-shadow: 0 12px 28px rgba(30, 30, 28, 0.12);
+}
+
+/* partea de sus: 3 nuante din paleta, alternate dupa pozitie */
+.int-card-top {
+    display: flex;
+    height: 190px;
+    flex-direction: column;
+    gap: 18px;
+    margin: 8px;
+    padding: 18px;
+    border-radius: 18px;
+}
+
+.int-tone-0 { background-color: var(--sand); }
+.int-tone-1 { background-color: var(--sand-soft); }
+.int-tone-2 { background-color: var(--blue-tint); }
+
+.int-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.int-card-text {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
     min-width: 0;
 }
 
-.informa-left label {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 5px 9px;
-    font-size: 10px;
-    color: #444;
-    width: fit-content;
-    margin-bottom: 8px;
-}
-
-.informa-left h4 {
+.int-card-date {
     font-size: 12px;
-    font-weight: 500;
-    margin: 0;
-    color: #444;
-}
-
-.informa-left h2 {
-    font-size: 18px;
-    line-height: 1.15;
     font-weight: 600;
-    margin: 0;
-    color: #222;
-    overflow-wrap: anywhere;
+    color: var(--charcoal-soft);
 }
 
-/* Logo și bookmark */
-.informa-right {
+.int-card-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--charcoal-soft);
+}
+
+.int-card-company {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--charcoal);
+}
+
+.int-card-side {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 20px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
-.informa-right svg {
-    width: 24px;
-    height: 24px;
-    padding: 5px;
-    background-color: white;
-    border-radius: 50%;
-    box-sizing: content-box;
+.int-bookmark {
+    width: 22px;
+    height: 22px;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: color 0.2s ease;
 }
 
-.img-url{
-    display: block;
-    width: 40px;
-    height: 40px;
+.int-bookmark:hover {
+    color: var(--electric-blue);
+}
+
+.int-card-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
     object-fit: cover;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-color: white;
+    background-color: #fff;
 }
 
-/* Categoriile internshipului */
-.info-part {
+.int-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 12px;
-}
-
-.info-part label {
-    border: 1px solid rgba(80, 65, 55, 0.2);
-    border-radius: 20px;
-    padding: 5px 9px;
-    font-size: 9px;
-    color: #444;
-    white-space: nowrap;
-}
-
-/* Partea inferioară */
-.down-card {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 7px 3px;
     gap: 8px;
 }
 
-.plata {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    text-align: left;
+.int-tag {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--charcoal);
 }
 
-.plata h3 {
+/* ---------- Partea de jos ---------- */
+.int-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 18px 18px;
+}
+
+.int-card-salary {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--charcoal);
+}
+
+.int-card-location {
+    margin: 2px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal-soft);
+}
+
+.int-btn {
+    padding: 10px 22px;
+    border: 1px solid var(--charcoal);
+    border-radius: 999px;
+    background-color: var(--charcoal);
+    color: var(--sand);
+    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
-    margin: 0;
-    color: #222;
-}
-
-.plata h4 {
-    font-size: 10px;
-    font-weight: 400;
-    color: #888;
-    margin: 0;
-}
-
-/* Buton Details */
-.detail-btn button {
-    background-color: #111;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 9px 17px;
-    font-size: 11px;
-    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: 0.2s ease;
 }
 
-.detail-btn button:hover {
-    background-color: #444;
+.int-btn:hover {
+    background-color: var(--electric-blue);
+    border-color: var(--electric-blue);
+    color: #fff;
+}
+
+.int-btn:focus-visible,
+.int-promo-link:focus-visible {
+    outline: 2px solid var(--electric-blue);
+    outline-offset: 3px;
+}
+
+@media (max-width: 991px) {
+    .int-main {
+        grid-template-columns: 1fr;
+    }
+
+    .int-divider {
+        display: none;
+    }
+
+    .int-search {
+        border-radius: 24px;
+        padding: 18px 20px;
+    }
+
+    .int-range {
+        flex-basis: 100%;
+    }
 }
