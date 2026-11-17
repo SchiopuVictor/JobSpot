@@ -1,58 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&display=swap');
 
-.container-title{
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
+:root {
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
+
+    --sand-light: #F3EEE3;
+    --sand-soft: #E9E0CF;
+    --charcoal-soft: #55524B;
+    --blue-tint: #E6EDFF;
 }
 
-.title {
-    font-size: 30px;
-    font-weight: 400;
-    color: rgb(0, 0, 0);
+/* =========================================================
+   PAGINA
+   ========================================================= */
+.ci-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 24px 24px 64px;
+    background-color: var(--sand-light);
+    color: var(--charcoal);
+    text-align: left;
 }
 
-.text {
-    margin-left: auto;
-    margin-right: auto;
-    width: 200px;
-    font-size: 12px;
-    font-weight: 400;
-    color: rgb(0, 0, 0);
+/* ---------- Titlu ---------- */
+.ci-title-block {
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    text-align: center;
 }
 
-.info-card {
-    font-family: 'Syne', sans-serif;
-    width: 200px;
-    height: 420px;
-    box-sizing: border-box;
-    padding: 28px 12px 24px;
+.ci-title {
+    margin: 0 0 8px;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--charcoal);
+}
+
+.ci-title span {
+    color: var(--electric-blue);
+}
+
+.ci-subtitle {
+    margin: 0;
+    font-size: 15px;
+    color: var(--charcoal-soft);
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.ci-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+/* =========================================================
+   CARDUL DECORATIV
+   ========================================================= */
+.ci-aside {
+    position: sticky;
+    top: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #ececf3;
-    border-radius: 24px;
-    background: linear-gradient(to bottom, #ffffff 0%, #f6f6fa 100%);
+    gap: 24px;
+    min-height: 460px;
+    padding: 32px 18px 28px;
+    box-sizing: border-box;
+    font-family: 'Syne', sans-serif;
+    background-color: var(--charcoal);
+    border-radius: 28px;
     overflow: hidden;
 }
 
-.info-card h2 {
+.ci-aside h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.25;
     text-align: center;
-    color: #111;
+    color: var(--sand);
 }
 
-.info-card h2 span {
+.ci-aside h2 span {
     display: block;
-    font-weight: 700;
-    color: #9b1fd1;
+    font-weight: 800;
+    color: var(--electric-blue);
 }
 
-.direct-card {
+.ci-ticket {
     width: 165px;
     height: 200px;
     box-sizing: border-box;
@@ -60,131 +102,280 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #fff;
-    border-radius: 14px;
+    background-color: var(--sand);
+    border-radius: 16px;
     transform: rotate(-10deg);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
-.h3-t {
+.ci-ticket h3 {
     margin: 0;
     align-self: flex-start;
-    font-size: 10px;
-    font-weight: 500;
-    color: #222;
 }
 
-.h3-b {
+.ci-ticket-top {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--charcoal);
+}
+
+.ci-ticket-mid {
+    align-self: center !important;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--charcoal);
+}
+
+.ci-ticket-mid::after {
+    content: ".";
+    color: var(--electric-blue);
+}
+
+.ci-ticket-bottom {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--charcoal-soft);
+}
+
+.ci-aside-label {
     margin: 0;
-    align-self: flex-start;
-    font-size: 10px;
-    font-weight: 500;
-    color: #c4c4cc;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(216, 203, 179, 0.7);
 }
 
-.h3-t b { font-weight: 700; }
-
-.icons {
-    display: flex;
-    gap: 6px;
-    align-items: center;
+/* =========================================================
+   CARDUL FORMULARULUI
+   ========================================================= */
+.ci-form-card {
+    padding: 36px;
+    background-color: #fff;
+    border: 1px solid var(--sand-soft);
+    border-radius: 28px;
+    box-shadow: 0 12px 32px rgba(30, 30, 28, 0.08);
 }
 
-.icons svg {
-    width: 22px;
-    height: 22px;
-    fill: none;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-
-.icons-main svg { stroke: #000; width: 26px; height: 26px; }
-.icons-main { align-self: center; }
-
-.icons-footer svg { stroke: #c9c9d2; }
-.icons-footer svg.accent { stroke: #9b1fd1; }
-
-.asede{
-    display: flex;
-    flex-direction: row;
-}
-
-.internship{
-    display: flex;
-    margin-top: 20px;
-    margin-right: 140px;
-    justify-content: center;
-    width: 100%;
-}
-
-.internship-form {
+.ci-form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 15px 20px;
-    width: 700px;
-    max-width: 100%;
-    margin: 0 auto;
-    overflow-y: auto;
-    scrollbar-width: none;
+    gap: 22px 20px;
 }
 
-.internship-form > div {
+.ci-full {
     grid-column: 1 / -1;
-    text-align: center;
 }
 
- .internship-form .intput-feald {
-    width: 100%;
+/* ---------- Campuri ---------- */
+.ci-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     min-width: 0;
-    box-sizing: border-box;
-    height: 40px;
-    margin: 0;
-    padding-left: 25px;
+}
+
+.ci-field label,
+.ci-label {
     font-size: 13px;
-    letter-spacing: .15px;
-    border: none;
-    outline: none;
-    font-family: 'Montserrat', sans-serif;
-    color: #181818;
-    background-color: #ecf0f3;
-    transition: .25s ease;
-    border-radius: 8px;
-    box-shadow:
-        inset 2px 2px 4px #d1d9e6,
-        inset -2px -2px 4px #f9f9f9;
-}
-
-.intput-feald:focus {
-    box-shadow:
-        inset 4px 4px 4px #d1d9e6,
-        inset -4px -4px 4px #f9f9f9;
-}
-
-.select-form {
-    padding-right: 20px;
-    cursor: pointer;
-}
-
-
-.form-button {
-    width: 150px;
-    height: 50px;
-    border-radius: 25px;
-    margin-top: 15px;
     font-weight: 700;
+    color: var(--charcoal);
+}
+
+.ci-field input[type="text"],
+.ci-field input[type="number"],
+.ci-field input[type="date"],
+.ci-field select,
+.ci-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    font-family: inherit;
     font-size: 14px;
-    letter-spacing: 1.15px;
-    background-color: #4B70E2;
-    color: #f9f9f9;
-    box-shadow:
-        8px 8px 16px #d1d9e6,
-        -8px -8px 16px #f9f9f9;
-    border: none;
+    color: var(--charcoal);
+    background-color: var(--sand-light);
+    border: 1px solid var(--sand-soft);
+    border-radius: 12px;
     outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.ci-field input::placeholder,
+.ci-field textarea::placeholder {
+    color: #9A958A;
+}
+
+.ci-field select {
     cursor: pointer;
 }
 
-.full-width {
-    grid-column: 1 / -1;
+.ci-field textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.5;
+}
+
+.ci-field input:focus,
+.ci-field select:focus,
+.ci-field textarea:focus {
+    background-color: #fff;
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.15);
+}
+
+/* ---------- Upload imagine ---------- */
+.ci-upload {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px;
+    background-color: var(--sand-light);
+    border: 1px dashed var(--sand);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.ci-upload:hover {
+    border-color: var(--electric-blue);
+}
+
+.ci-upload-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background-color: var(--charcoal);
+    color: var(--sand);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ci-upload-name {
+    font-size: 13px;
+    color: var(--charcoal-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* input-ul nativ e ascuns, dar ramane accesibil de la tastatura */
+.ci-upload-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.ci-upload-input:focus-visible + .ci-upload,
+.ci-field:focus-within .ci-upload {
+    border-color: var(--electric-blue);
+}
+
+/* ---------- Eroare ---------- */
+.ci-error {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--charcoal);
+    background-color: var(--blue-tint);
+    border: 1px solid var(--electric-blue);
+    border-radius: 12px;
+}
+
+/* ---------- Butoane ---------- */
+.ci-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.ci-cancel,
+.ci-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.ci-cancel {
+    background: transparent;
+    border: 1px solid var(--sand);
+    color: var(--charcoal);
+}
+
+.ci-cancel:hover {
+    background-color: var(--sand);
+}
+
+.ci-submit {
+    background-color: var(--charcoal);
+    border: 1px solid var(--charcoal);
+    color: var(--sand);
+    box-shadow: 0 8px 20px rgba(30, 30, 28, 0.2);
+}
+
+.ci-submit:hover:not(:disabled) {
+    background-color: var(--electric-blue);
+    border-color: var(--electric-blue);
+    color: #fff;
+}
+
+.ci-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ci-submit:focus-visible,
+.ci-cancel:focus-visible {
+    outline: 2px solid var(--electric-blue);
+    outline-offset: 3px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 991px) {
+    .ci-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .ci-aside {
+        position: static;
+        min-height: auto;
+        padding: 24px 18px;
+    }
+
+    .ci-ticket {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .ci-form-card {
+        padding: 22px 18px;
+    }
+
+    .ci-form {
+        grid-template-columns: 1fr;
+    }
+
+    .ci-actions {
+        flex-direction: column-reverse;
+    }
+
+    .ci-cancel,
+    .ci-submit {
+        width: 100%;
+    }
 }

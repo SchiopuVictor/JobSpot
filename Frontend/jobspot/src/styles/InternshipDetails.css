@@ -146,7 +146,7 @@
     font-weight: 600;
 }
 
-.left-side h3{
+.left-side h3 {
     text-align: left;
     width: 85%;
     font-size: 18px;
@@ -187,7 +187,7 @@
     color: #232323;
     font-size: 15px;
     justify-content: left;
-    width: 180px;
+    width: 150px;
 }
 
 .benefits-part h3 {
@@ -197,7 +197,9 @@
 }
 
 .benefits-part h4 {
+    align-items: center;
     display: flex;
+    gap: 5px;
     font-size: 15px;
     font-weight: 400;
 }
@@ -227,6 +229,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding: 6px;
+    margin-left: -6px;
     border-radius: 10px;
     width: 60px;
     height: 60px;
@@ -248,7 +251,6 @@
     font-size: 17px;
     font-weight: 400;
     color: #1E1E1C;
-
 }
 
 .verify {
@@ -267,4 +269,35 @@
 .verify p {
     margin: 0;
     font-size: 14px;
+}
+
+.part-svg{
+    display: flex;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.save-bookmark 
+{
+    width: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    color: var(--sand);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.requirements-list {
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.requirements-list li {
+    text-align: left;
+    padding-left: 5px;
+    line-height: 1.5;
 }

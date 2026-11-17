@@ -239,7 +239,7 @@ function Internshipuri() {
                                     <button
                                         type="button"
                                         className="int-btn"
-                                        onClick={() => navigate("/infointernship")}
+                                        onClick={() => navigate(`/infointernship/${intern.id}`)}
                                     >
                                         Details
                                     </button>

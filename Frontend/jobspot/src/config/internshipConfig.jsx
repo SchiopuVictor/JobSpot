@@ -20,3 +20,7 @@ export async function postInternship(formData) {
 export function getInternships(){
     return api.get(`/internship/all`);
 }
+
+export function getIntershipById(id){
+    return api.get(`/internship/${id}`);
+}

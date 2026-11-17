@@ -15,4 +15,8 @@ export function postCompany(data){
     return(axios.post(`${url}/company`,data));
 }
 
+export function getCompanyInformation(id){
+    return(api.get(`/company/${id}`));
+}
+
 

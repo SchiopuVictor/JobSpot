@@ -9,6 +9,7 @@ public class InternshipMapper {
     public static InternshipResponseDto toDto(Internship internship){
         return InternshipResponseDto.builder()
                 .id(internship.getId())
+                .company_id(internship.getCompany().getId())
                 .companyName(internship.getCompany().getCompanyName())
                 .working_schedule(internship.getRequirements())
                 .imgUrl(internship.getImageUrl())
