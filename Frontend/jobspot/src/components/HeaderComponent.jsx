@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 function HeaderComponent() {
     
-    const { accessToken,logout} = useAuth(); 
+    const {accessToken,logout} = useAuth(); 
     const navigate = useNavigate();
     return (
         <div>

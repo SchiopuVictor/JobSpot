@@ -1,10 +1,7 @@
 package com.jobspot.service;
 
 import com.jobspot.dto.ApplicationRequestDto;
-import com.jobspot.entity.Application;
-import com.jobspot.entity.Cv;
-import com.jobspot.entity.Internship;
-import com.jobspot.entity.Student;
+import com.jobspot.entity.*;
 import com.jobspot.exceptions.ApplicationNotFoundException;
 import com.jobspot.exceptions.CvNotFoundException;
 import com.jobspot.exceptions.InternshipNotFoundException;
@@ -16,6 +13,7 @@ import com.jobspot.repository.InternshipRepository;
 import com.jobspot.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,10 +36,20 @@ public class ApplicationService {
         Internship internship = internshipRepository.findById(request.getInternship_id())
                 .orElseThrow(InternshipNotFoundException::new);
 
-        Student student = studentRepository.findById(request.getStudent_id())
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        assert principal != null;
+        Long userId = Long.valueOf(principal.toString());
+
+
+        Student student = studentRepository.findById(userId)
                 .orElseThrow(StudentNotFoundException::new);
 
         application.setCv(cv);
+        application.setStatus(ApplicationStatus.Applied);
         application.setAppliedAt(LocalDate.now());
         application.setStudent(student);
         application.setInternship(internship);
@@ -65,10 +73,18 @@ public class ApplicationService {
         Internship internship = internshipRepository.findById(request.getInternship_id())
                 .orElseThrow(InternshipNotFoundException::new);
 
-        Student student = studentRepository.findById(request.getStudent_id())
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        assert principal != null;
+        Long userId = Long.valueOf(principal.toString());
+
+        Student student = studentRepository.findById(userId)
                 .orElseThrow(StudentNotFoundException::new);
 
-        application.setStatus(request.getStatus());
+        application.setStatus(ApplicationStatus.Applied);
         application.setStudent(student);
         application.setCoverLetter(request.getCoverLetter());
         application.setCv(cv);

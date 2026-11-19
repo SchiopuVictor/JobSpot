@@ -1,0 +1,267 @@
+:root {
+    --charcoal: #1E1E1C;
+    --sand: #D8CBB3;
+    --electric-blue: #2F6BFF;
+
+    --sand-light: #F3EEE3;
+    --sand-soft: #E9E0CF;
+    --charcoal-soft: #55524B;
+    --blue-tint: #E6EDFF;
+}
+
+.cv-page{
+    display: flex;
+    flex-direction: column;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.titles h2{
+    font-size: 25px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.titles h4{
+    font-size: 16px;
+    font-weight: 300;
+    text-align: left;
+}
+
+.uper-block{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.text-upper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 80%;
+}
+
+.text-upper h3{
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.text-upper label{
+    display: flex;
+    background-color: #a9e493;
+    border-radius: 30px;
+    width: 75px;
+    margin: 0;
+    justify-content: center;
+    color: #35482f;
+}
+
+.mid-block{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+}
+
+.pdf-svg{
+    display: block;
+    width: 32px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.left-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(189, 129, 129, 0.585);
+    border-radius: 10px;
+}
+
+.right-block{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.right-block h3{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.right-block h4{
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--charcoal-soft);
+}
+
+.uper-block hr{
+    height: 1px;
+    border: none;
+    display: flex;
+    background-color: var(--charcoal-soft);
+    width: 100%;
+}
+
+.block-buttons{
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+}
+
+.download{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    gap:5px;
+    background-color: #ffffff;
+    border: 1px solid var(--charcoal-soft);
+    color: var(--charcoal-soft);
+    height: 40px;
+    border-radius: 10px;
+}
+
+.down-svg{
+    display: block;
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+}
+
+.replace{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 45%;
+    background-color: var(--electric-blue);
+    color: #fff;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+
+.replace-svg{
+    fill: #fff;
+    display: block;
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+}
+
+
+.bottom-block {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    background-color: #fff;
+    border-radius: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.upload-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 64px;
+    height: 64px;
+    min-width: 52px;
+    min-height: 52px;
+
+    background-color: var(--blue-tint);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.upload-svg {
+    display: block;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+
+    stroke: var(--electric-blue);
+}
+
+.bottom-block h2{
+    margin-top: 10px;
+    display: flex;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.bottom-block h3{
+    margin-top: 10px;
+    display: flex;
+    color: var(--charcoal-soft);
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.input-file {
+    display: none;
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 96px;
+    box-sizing: border-box;
+
+    border: 1px dashed var(--electric-blue);
+    border-radius: 12px;
+
+    cursor: pointer;
+    gap: 5px;
+    color: var(--electric-blue);
+}
+
+.file-plus-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.upload-area span {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.upload-area small {
+    font-size: 12px;
+    color: var(--charcoal-soft);
+}
+
+.upload-area:hover {
+    background-color: var(--blue-tint);
+}
+
+.cv-page h5{
+    margin-top: 10px;
+    color: var(--charcoal-soft);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 300;
+
+}
