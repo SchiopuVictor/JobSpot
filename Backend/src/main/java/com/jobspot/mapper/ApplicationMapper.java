@@ -20,7 +20,6 @@ public class ApplicationMapper {
     public static Application toEntity(ApplicationRequestDto request){
         return Application.builder()
                 .coverLetter(request.getCoverLetter())
-                .status(request.getStatus())
                 .build();
     }
 }

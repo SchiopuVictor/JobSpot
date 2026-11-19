@@ -7,8 +7,14 @@ import { getCompanyInformation } from '../config/studentConfig.jsx';
 function InternshipDetails(){
     const {id} = useParams();
     const [error, setError] = useState("");
+    const [showModal,setShowModal] = useState(false);
     const [internship, setInternships] = useState(null);
     const [company, setCopmany] = useState(null);
+    const [application,setApplication] = useState({
+        cvId: "",
+        coverLetter: ""
+    })
+
     useEffect(()=>{
         async function getInformation(){
             try{
@@ -51,10 +57,111 @@ function InternshipDetails(){
                         </div>
                     </div>
                     <div className='jobs-buttons'>
-                        <Link className='apply-btn'>
+                        <button className='apply-btn' onClick={()=>setShowModal(true)}>
                             Apply for this internship
-                        </Link>
+                        </button>
+                        {showModal && (
+                            <div className="apply-overlay" onClick={() => setShowModal(false)}>
+                                <div
+                                    className="apply-modal"
+                                    role="dialog"
+                                    aria-modal="true"
+                                    aria-labelledby="apply-title"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <button
+                                        type="button"
+                                        className="apply-close"
+                                        aria-label="Close"
+                                        onClick={() => setShowModal(false)}
+                                    >
+                                        ×
+                                    </button>
 
+                                    <h2 id="apply-title" className="apply-title">
+                                        Apply for this <span>internship</span>
+                                    </h2>
+                                    <p className="apply-subtitle">
+                                        Completează datele de mai jos și trimite-ți aplicația.
+                                    </p>
+
+                                    <form
+                                        className="apply-form"
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                        }}
+                                    >
+                                        <div className="apply-field">
+                                            <label htmlFor="apply-name">Nume și Prenume</label>
+                                            <input
+                                                id="apply-name"
+                                                type="text"
+                                                placeholder="Ion Popescu"
+                                                required
+                                            />
+                                        </div>
+
+                                        <div className="apply-row">
+                                            <div className="apply-field">
+                                                <label htmlFor="apply-phone">Număr telefon</label>
+                                                <input
+                                                    id="apply-phone"
+                                                    type="tel"
+                                                    placeholder="+373 600 00 000"
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="apply-field">
+                                                <label htmlFor="apply-email">Email</label>
+                                                <input
+                                                    id="apply-email"
+                                                    type="email"
+                                                    placeholder="nume@email.com"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="apply-field">
+                                            <span className="apply-label">CV</span>
+                                            <label htmlFor="apply-cv" className="apply-upload">
+                                                <span className="apply-upload-btn">Alege fișier</span>
+                                                <span className="apply-upload-name">Niciun fișier selectat</span>
+                                            </label>
+                                            <input
+                                                id="apply-cv"
+                                                type="file"
+                                                accept=".pdf,.doc,.docx"
+                                                className="apply-upload-input"
+                                            />
+                                        </div>
+
+                                        <div className="apply-field">
+                                            <label htmlFor="apply-letter">Scrisoare de aplicare</label>
+                                            <textarea
+                                                id="apply-letter"
+                                                rows="4"
+                                                placeholder="Spune-ne de ce ești potrivit pentru acest internship"
+                                            />
+                                        </div>
+
+                                        <div className="apply-actions">
+                                            <button
+                                                type="button"
+                                                className="apply-cancel"
+                                                onClick={() => setShowModal(false)}
+                                            >
+                                                Close
+                                            </button>
+                                            <button type="submit" className="apply-submit">
+                                                Trimite
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        )}
                         <Link className='save-btn'>
                             <svg className="save-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
                                 <path d="M6 3h12v18l-6-4-6 4z" />

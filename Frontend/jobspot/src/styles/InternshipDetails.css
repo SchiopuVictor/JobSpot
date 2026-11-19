@@ -89,6 +89,9 @@
 .apply-btn {
     display: flex;
     flex: 1;
+    border: none;
+    box-shadow: 0 4px 9px #1e1e1c58;;
+    transition: box-shadow 0.3s ease;
     height: 40px;
     justify-content: center;
     align-items: center;
@@ -99,6 +102,13 @@
     background-color: var(--charcoal);
 }
 
+.apply-btn:hover{
+    border: none;
+    box-shadow: 0 4px 11px  #d8cbb39d;
+    background: var(--sand);
+    color: var(--charcoal);
+}
+
 .save-btn {
     display: flex;
     width: fit-content;
@@ -107,11 +117,19 @@
     justify-content: center;
     align-items: center;
     white-space: nowrap;
+    box-shadow: 0 4px 9px #2f6aff71;
+    transition: box-shadow 0.3s ease;
     border-radius: 999px;
     text-align: center;
     text-decoration: none;
-    color: var(--sand-soft);
+    color: #ffff;
     background-color: var(--electric-blue);
+}
+
+.save-btn:hover{
+    background: #fff;
+    border-color: #fff;
+    color: var(--electric-blue);
 }
 
 .more-info{
@@ -259,7 +277,7 @@
     gap: 8px;
     padding: 12px 20px;
     border-top: 1px solid #e1e5e9;
-    background: #8f8f8f;
+    background: #8f8f8f3a;
 
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -269,6 +287,18 @@
 .verify p {
     margin: 0;
     font-size: 14px;
+}
+
+.verify span{
+    display: flex;
+    width: 17px;
+    height: 17px;
+
+    align-items: center;
+    background-color: #a9e493;
+    color: #ffffff;
+    border-radius: 50%;
+    justify-content: center;
 }
 
 .part-svg{
@@ -284,10 +314,14 @@
     justify-content: center;
     align-items: center;
     height: 20px;
-    color: var(--sand);
+    fill: #fff;
     cursor: pointer;
     transition: color 0.2s ease;
 }
+
+.save-bookmark:hover{
+    fill: var(--electric-blue);
+} 
 
 .requirements-list {
     padding-left: 22px;
@@ -300,4 +334,298 @@
     text-align: left;
     padding-left: 5px;
     line-height: 1.5;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    width: 500px;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.apply-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(30, 30, 28, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    overflow-y: auto;
+    animation: apply-fade 0.2s ease;
+}
+
+.apply-modal {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    margin: auto;
+    padding: 36px;
+    box-sizing: border-box;
+    text-align: left;
+    background-color: #fff;
+    color: var(--charcoal);
+    border: 1px solid var(--sand-soft);
+    border-radius: 28px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    animation: apply-pop 0.25s ease;
+}
+
+@keyframes apply-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes apply-pop {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Buton X ---------- */
+.apply-modal .apply-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 3px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--sand-light);
+    color: var(--charcoal);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.apply-modal .apply-close:hover {
+    background-color: var(--charcoal);
+    color: var(--sand);
+}
+
+/* ---------- Titlu ---------- */
+.apply-modal .apply-title {
+    margin: 0 40px 6px 0;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+    width: auto;
+}
+
+.apply-modal .apply-title span {
+    color: var(--electric-blue);
+}
+
+.apply-modal .apply-subtitle {
+    margin: 0 0 24px;
+    font-size: 14px;
+    color: var(--charcoal-soft);
+}
+
+/* ---------- Formular ---------- */
+.apply-modal .apply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.apply-modal .apply-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.apply-modal .apply-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+/* resetam stilurile generice de label din pagina (ex. fundalul gri) */
+.apply-modal .apply-field label,
+.apply-modal .apply-label {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--charcoal);
+}
+
+.apply-modal .apply-field input[type="text"],
+.apply-modal .apply-field input[type="tel"],
+.apply-modal .apply-field input[type="email"],
+.apply-modal .apply-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--charcoal);
+    background-color: var(--sand-light);
+    border: 1px solid var(--sand-soft);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.apply-modal .apply-field input::placeholder,
+.apply-modal .apply-field textarea::placeholder {
+    color: #9A958A;
+}
+
+.apply-modal .apply-field textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.apply-modal .apply-field input:focus,
+.apply-modal .apply-field textarea:focus {
+    background-color: #fff;
+    border-color: var(--electric-blue);
+    box-shadow: 0 0 0 4px rgba(47, 107, 255, 0.15);
+}
+
+/* ---------- Upload CV ---------- */
+.apply-modal .apply-field label.apply-upload {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px;
+    background-color: var(--sand-light);
+    border: 1px dashed var(--sand);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.apply-modal .apply-upload:hover,
+.apply-modal .apply-field:focus-within .apply-upload {
+    border-color: var(--electric-blue);
+}
+
+.apply-modal .apply-upload-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background-color: var(--charcoal);
+    color: var(--sand);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.apply-modal .apply-upload-name {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--charcoal-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* input-ul nativ e ascuns, dar ramane accesibil de la tastatura */
+.apply-modal .apply-upload-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* ---------- Butoane ---------- */
+.apply-modal .apply-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 6px;
+}
+
+.apply-modal .apply-cancel,
+.apply-modal .apply-submit {
+    height: 46px;
+    padding: 0 30px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.apply-modal .apply-cancel {
+    background: transparent;
+    border: 1px solid var(--sand);
+    color: var(--charcoal);
+}
+
+.apply-modal .apply-cancel:hover {
+    background-color: var(--sand);
+}
+
+.apply-modal .apply-submit {
+    background-color: var(--electric-blue);
+    border: 1px solid var(--electric-blue);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(47, 107, 255, 0.3);
+}
+
+.apply-modal .apply-submit:hover {
+    background-color: var(--charcoal);
+    border-color: var(--charcoal);
+    color: var(--sand);
+}
+
+.apply-modal .apply-close:focus-visible,
+.apply-modal .apply-cancel:focus-visible,
+.apply-modal .apply-submit:focus-visible {
+    outline: 2px solid var(--electric-blue);
+    outline-offset: 3px;
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 560px) {
+    .apply-modal {
+        padding: 28px 20px;
+        border-radius: 22px;
+    }
+
+    .apply-modal .apply-row {
+        grid-template-columns: 1fr;
+    }
+
+    .apply-modal .apply-actions {
+        flex-direction: column-reverse;
+    }
+
+    .apply-modal .apply-cancel,
+    .apply-modal .apply-submit {
+        width: 100%;
+    }
 }

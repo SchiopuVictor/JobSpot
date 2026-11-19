@@ -19,4 +19,8 @@ export function getCompanyInformation(id){
     return(api.get(`/company/${id}`));
 }
 
+export function getStudentInfo(id){
+    return(api.get(`/student/${id}`));
+}
+
 
