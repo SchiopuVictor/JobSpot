@@ -18,6 +18,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public User findUserByStudentId(Long studentId){
+        return userRepository.findById(studentId)
+                .orElseThrow(()->new RuntimeException("User not found!!"));
+    }
+
     @Transactional
     public User createUser(UserRequestDto request){
         User user = UserMapper.toEntity(request);

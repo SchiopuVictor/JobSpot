@@ -28,6 +28,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final StudentRepository studentRepository;
     private final CompanyRepository companyRepository;
@@ -47,14 +49,16 @@ public class AuthenticationController {
             @Valid @RequestBody AuthRequestDto request,
             HttpServletResponse response)
     {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(UserNotFoundExceptions::new);
+
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
                         request.getPassword()
                 ));
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(UserNotFoundExceptions::new);
+
 
         String accessToken = jwtService.generateAccessToken(user).toString();
         String refreshToken = jwtService.generateRefreshToken(user).toString();

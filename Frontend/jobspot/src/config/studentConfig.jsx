@@ -23,4 +23,8 @@ export function getStudentInfo(id){
     return(api.get(`/student/${id}`));
 }
 
+export function getUserInfoByStudent(studentId){
+    return (api.get(`users/info/${studentId}`));
+}
+
 

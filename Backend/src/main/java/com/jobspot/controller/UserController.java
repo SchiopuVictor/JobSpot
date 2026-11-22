@@ -17,6 +17,12 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/info/{studentId}")
+    public ResponseEntity<UserResponseDto> getUserByStudentId(@PathVariable Long studentId){
+       return ResponseEntity.ok(UserMapper
+               .toDto(userService.findUserByStudentId(studentId)));
+    }
+
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto request){
         return ResponseEntity.ok(UserMapper.toDto(userService.createUser(request)));

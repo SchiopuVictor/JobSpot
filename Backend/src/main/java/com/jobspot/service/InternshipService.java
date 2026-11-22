@@ -29,7 +29,7 @@ public class InternshipService {
     private final CompanyRepository companyRepository;
 
     public List<Internship> getAllInternships(){
-        return  internshipRepository.findAll();
+        return internshipRepository.findAll();
     }
 
     @Transactional
