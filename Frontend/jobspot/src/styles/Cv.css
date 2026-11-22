@@ -202,7 +202,7 @@
 .bottom-block h2{
     margin-top: 10px;
     display: flex;
-    font-size: 17px;
+    font-size: 25px;
     font-weight: 600;
     text-align: center;
 }
@@ -263,5 +263,19 @@
     text-align: center;
     font-size: 13px;
     font-weight: 300;
+}
 
+.sumbut{
+    margin-top: 10px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--charcoal);
+    color: var(--sand-light);
+    box-shadow: 0px 10px 30px var(--charcoal-soft);
 }

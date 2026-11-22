@@ -9,6 +9,7 @@ public class StudentMapper {
     public static StudentResponseDto toDto(Student student){
         return StudentResponseDto.builder()
                 .user_id(student.getUser().getId())
+                .phone(student.getPhone())
                 .firstName(student.getFirstName())
                 .lastName(student.getLastName())
                 .city(student.getCity())

@@ -2,24 +2,52 @@ import { Link, useParams } from 'react-router-dom';
 import '../styles/InternshipDetails.css'
 import { useEffect, useState } from 'react';
 import {getIntershipById} from '../config/internshipConfig.jsx';
-import { getCompanyInformation } from '../config/studentConfig.jsx';
+import { getCompanyInformation, getStudentInfo,getUserInfoByStudent } from '../config/studentConfig.jsx';
+import { jwtDecode } from 'jwt-decode';
+import { useAuth } from "../context/AuthContext";
+
+import {getCvById} from "../config/cvConfig.jsx";
+import Cv from './Cv.jsx';
 
 function InternshipDetails(){
+    const { accessToken } = useAuth();
     const {id} = useParams();
     const [error, setError] = useState("");
     const [showModal,setShowModal] = useState(false);
     const [internship, setInternships] = useState(null);
     const [company, setCopmany] = useState(null);
+    const [cv,setCv] = useState(null);
+    const [selectCv,setSelectCv] = useState(null);
+
+    const decodeToken = accessToken ? jwtDecode(accessToken) : null;
+
     const [application,setApplication] = useState({
         cvId: "",
         coverLetter: ""
-    })
+    });
+
+    const [personalInfo, setPersonalInfo] = useState({
+        fullName: "",
+        phone: "",
+        email: ""
+    });
 
     useEffect(()=>{
         async function getInformation(){
             try{
                 const response = await getIntershipById(id);
                 setInternships(response.data);
+
+                const studentResponse = await getStudentInfo(decodeToken.sub);
+                const userResponse = await getUserInfoByStudent(decodeToken.sub);
+                const cvResponse = await getCvById(decodeToken.sub);
+                setCv(cvResponse.data);
+                
+                setPersonalInfo({
+                    fullName: `${studentResponse.data.firstName} ${studentResponse.data.lastName}`,
+                    phone: studentResponse.data.phone,
+                    email: userResponse.data.email
+                });
                 
                 const companyResponse = await getCompanyInformation(response.data.company_id);
                 setCopmany(companyResponse.data);
@@ -89,6 +117,12 @@ function InternshipDetails(){
                                         className="apply-form"
                                         onSubmit={(e) => {
                                             e.preventDefault();
+                                            const finalCv = selectCv || cv;
+                                            if (!finalCv) {
+                                                setError("Trebuie să încarci un CV!");
+                                                return;
+                                            }
+                                             console.log(finalCv);
                                         }}
                                     >
                                         <div className="apply-field">
@@ -98,6 +132,10 @@ function InternshipDetails(){
                                                 type="text"
                                                 placeholder="Ion Popescu"
                                                 required
+                                                value={personalInfo.fullName}
+                                                onChange={(e)=>{
+                                                    setPersonalInfo({...personalInfo,fullName:e.target.value})
+                                                }}
                                             />
                                         </div>
 
@@ -109,6 +147,10 @@ function InternshipDetails(){
                                                     type="tel"
                                                     placeholder="+373 600 00 000"
                                                     required
+                                                    value={personalInfo?.phone}
+                                                    onChange={(e)=>{
+                                                        setPersonalInfo({...personalInfo,phone:e.target.value})
+                                                    }}
                                                 />
                                             </div>
 
@@ -119,6 +161,10 @@ function InternshipDetails(){
                                                     type="email"
                                                     placeholder="nume@email.com"
                                                     required
+                                                    value={personalInfo?.email}
+                                                    onChange={(e)=>{
+                                                        setPersonalInfo({...personalInfo,email:e.target.value})
+                                                    }}
                                                 />
                                             </div>
                                         </div>
@@ -127,13 +173,22 @@ function InternshipDetails(){
                                             <span className="apply-label">CV</span>
                                             <label htmlFor="apply-cv" className="apply-upload">
                                                 <span className="apply-upload-btn">Alege fișier</span>
-                                                <span className="apply-upload-name">Niciun fișier selectat</span>
+                                                <span className="apply-upload-name">{selectCv
+                                                    ? selectCv.name
+                                                    : cv
+                                                        ? cv.fileName
+                                                        : "Niciun fișier selectat"
+                                                }</span>
                                             </label>
                                             <input
                                                 id="apply-cv"
                                                 type="file"
                                                 accept=".pdf,.doc,.docx"
                                                 className="apply-upload-input"
+                                                onChange={(e)=>{
+                                                    setSelectCv(e.target.files[0].name);
+                                                }
+                                            }
                                             />
                                         </div>
 

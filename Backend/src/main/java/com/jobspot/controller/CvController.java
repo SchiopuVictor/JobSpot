@@ -10,12 +10,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/cv")
 public class CvController {
 
     private final CvService cvService;
+
+    @GetMapping("/studentcv/{studentId}")
+    public ResponseEntity<List<CvResponseDto>> getCvByStudentId(@PathVariable long studentId)
+    {
+        return ResponseEntity.ok().body(
+                cvService.getCvByStudentId(studentId)
+                    .stream()
+                    .map(CvMapper::toDto)
+                    .toList()
+        );
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<CvResponseDto> getCv(@PathVariable Long id){

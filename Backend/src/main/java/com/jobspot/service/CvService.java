@@ -10,9 +10,11 @@ import com.jobspot.repository.CvRepository;
 import com.jobspot.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +23,28 @@ public class CvService
     private final CvRepository cvRepository;
     private final StudentRepository studentRepository;
 
+
+    public List<Cv> getCvByStudentId(long studentId){
+        studentRepository.findById(studentId)
+                .orElseThrow(StudentNotFoundException::new);
+
+        return cvRepository.findCvByStudentId(studentId);
+    }
+
     @Transactional
     public Cv createCv(CvRequestDto request){
+
+
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        assert principal != null;
+        Long student_Id = Long.valueOf(principal.toString());
+
         Student student = studentRepository
-                .findById(request.getUser_Id()).orElseThrow(StudentNotFoundException::new);
+                .findById(student_Id).orElseThrow(StudentNotFoundException::new);
 
         Cv cv = CvMapper.toEntity(request);
         cv.setStudent(student);

@@ -15,6 +15,7 @@ public class StudentResponseDto {
     private String lastName;
     private String university;
     private String faculty;
+    private String phone;
     private Integer studyYear;
     private String city;
     private String description;
