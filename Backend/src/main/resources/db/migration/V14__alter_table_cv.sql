@@ -1,0 +1,2 @@
+ALTER TABLE cv
+    ADD COLUMN file_path VARCHAR(500);

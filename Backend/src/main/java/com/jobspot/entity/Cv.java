@@ -31,4 +31,6 @@ public class Cv {
     @Column(name = "uploaded_at")
     private LocalDate uploadedAt;
 
+    @Column(name = "file_path")
+    private String filePath;
 }

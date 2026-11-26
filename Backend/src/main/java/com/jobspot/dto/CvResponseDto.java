@@ -14,8 +14,10 @@ import java.time.LocalDate;
 @Builder
 public class CvResponseDto {
 
+    private long id;
     private long student_id;
     private String fileName;
+    private String filePath;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate createdAt;
 }

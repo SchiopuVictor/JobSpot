@@ -1,7 +1,10 @@
 import api from "./axiosConfig";
 
-export function postCv(data){
-    return api.post(`/cv`,data);
+export function postCv(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    return api.post("/cv", formData);
 }
 
 export function getCvById(id){

@@ -23,7 +23,6 @@ function CreateInternship() {
         imgUrl: ""
     });
 
-    // un singur handler pentru toate campurile (citeste name-ul din input)
     function handleChange(e) {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -62,7 +61,6 @@ function CreateInternship() {
 
             <div className="ci-layout">
 
-                {/* ---------- Card decorativ ---------- */}
                 <aside className="ci-aside">
                     <h2>
                         Let's have the future <span>TODAY</span>
@@ -77,7 +75,6 @@ function CreateInternship() {
                     <h3 className="ci-aside-label">Internship</h3>
                 </aside>
 
-                {/* ---------- Formular ---------- */}
                 <div className="ci-form-card">
                     <form className="ci-form" onSubmit={handleSubmit}>
 

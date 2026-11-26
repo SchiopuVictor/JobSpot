@@ -12,9 +12,16 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -32,22 +39,41 @@ public class CvService
     }
 
     @Transactional
-    public Cv createCv(CvRequestDto request){
+    public Cv createCv(MultipartFile file ) throws IOException {
 
+        if(file == null || file.isEmpty()){
+            throw new IllegalArgumentException("Fisierul este gol");
+        }
+
+        if (!"application/pdf".equals(file.getContentType())) {
+            throw new IllegalArgumentException("Este permis doar formatul PDF!");
+        }
 
         Object principal = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getPrincipal();
 
-        assert principal != null;
-        Long student_Id = Long.valueOf(principal.toString());
+        Long student_Id = Long.valueOf(Objects.requireNonNull(principal).toString());
 
         Student student = studentRepository
                 .findById(student_Id).orElseThrow(StudentNotFoundException::new);
 
-        Cv cv = CvMapper.toEntity(request);
+        String originalName = file.getOriginalFilename();
+        String storedName = UUID.randomUUID() +".pdf";
+
+        Path uploadPath = Paths.get("uploads/cvs");
+        Files.createDirectories(uploadPath);
+
+        Path filePath = uploadPath.resolve(storedName);
+        Files.copy(file.getInputStream(),filePath);
+
+
+        Cv cv = new Cv();
+
         cv.setStudent(student);
+        cv.setFileName(originalName);
+        cv.setFilePath(filePath.toString());
         cv.setUploadedAt(LocalDate.now());
 
         return cvRepository.save(cv);

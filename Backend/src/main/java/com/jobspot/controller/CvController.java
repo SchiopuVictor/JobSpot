@@ -7,9 +7,12 @@ import com.jobspot.service.CvService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -35,9 +38,9 @@ public class CvController {
         return ResponseEntity.ok(CvMapper.toDto(cvService.getCv(id)));
     }
 
-    @PostMapping
-    public ResponseEntity<CvResponseDto> createCv(@Valid @RequestBody CvRequestDto request){
-        return ResponseEntity.ok(CvMapper.toDto(cvService.createCv(request)));
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<CvResponseDto> createCv(@RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(CvMapper.toDto(cvService.createCv(file)));
     }
 
     @PutMapping("/{id}")
