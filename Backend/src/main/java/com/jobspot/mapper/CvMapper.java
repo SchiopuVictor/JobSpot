@@ -8,6 +8,8 @@ public class CvMapper {
 
     public static CvResponseDto toDto(Cv cv){
         return CvResponseDto.builder()
+                .id(cv.getId())
+                .filePath(cv.getFilePath())
                 .student_id(cv.getStudent().getId())
                 .createdAt(cv.getUploadedAt())
                 .fileName(cv.getFileName())

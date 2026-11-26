@@ -1,11 +1,12 @@
 import { Link, useParams } from 'react-router-dom';
 import '../styles/InternshipDetails.css'
 import { useEffect, useState } from 'react';
-import {getIntershipById} from '../config/internshipConfig.jsx';
+import {getIntershipById, postInternship} from '../config/internshipConfig.jsx';
 import { getCompanyInformation, getStudentInfo,getUserInfoByStudent } from '../config/studentConfig.jsx';
 import { jwtDecode } from 'jwt-decode';
 import { useAuth } from "../context/AuthContext";
-
+import { postApplication } from '../config/applicatipnConfig.jsx';
+import { postCv } from '../config/cvConfig.jsx';
 import {getCvById} from "../config/cvConfig.jsx";
 import Cv from './Cv.jsx';
 
@@ -22,7 +23,8 @@ function InternshipDetails(){
     const decodeToken = accessToken ? jwtDecode(accessToken) : null;
 
     const [application,setApplication] = useState({
-        cvId: "",
+        cv_id: "",
+        internship_id:"",
         coverLetter: ""
     });
 
@@ -38,10 +40,10 @@ function InternshipDetails(){
                 const response = await getIntershipById(id);
                 setInternships(response.data);
 
-                const studentResponse = await getStudentInfo(decodeToken.sub);
-                const userResponse = await getUserInfoByStudent(decodeToken.sub);
-                const cvResponse = await getCvById(decodeToken.sub);
-                setCv(cvResponse.data);
+                const studentResponse = await getStudentInfo(decodeToken?.sub);
+                const userResponse = await getUserInfoByStudent(decodeToken?.sub);
+                const cvResponse = await getCvById(studentResponse.data.id);
+                setCv(cvResponse.data.length > 0 ? cvResponse.data[0] : null);
                 
                 setPersonalInfo({
                     fullName: `${studentResponse.data.firstName} ${studentResponse.data.lastName}`,
@@ -60,6 +62,44 @@ function InternshipDetails(){
 
         getInformation();
     },[id]);
+
+   async function handleChange(e){
+        try{
+            e.preventDefault();
+            
+            const finalCv = selectCv || cv;
+            
+            if (!finalCv) {
+                setError("Trebuie să încarci un CV!");
+                return;
+            }
+
+            let cvId;
+
+            if (selectCv) {
+                const response = await postCv(selectCv);
+                cvId = response.data.id;
+            }else {
+                cvId = cv?.id;
+            }
+
+            if (!cvId) {
+                setError("CV-ul nu a putut fi identificat!");
+                return;
+            }
+
+            await postApplication({
+                cv_id: cvId,
+                internship_id: id,
+                coverLetter: application.coverLetter
+            });
+        }catch(err){
+            setError(
+                err.response?.data?.message ||
+                "A apărut o problemă la conectarea cu backend-ul"
+            );
+        }
+    }
 
     return (
         <div className='pag'>
@@ -113,17 +153,8 @@ function InternshipDetails(){
                                         Completează datele de mai jos și trimite-ți aplicația.
                                     </p>
 
-                                    <form
-                                        className="apply-form"
-                                        onSubmit={(e) => {
-                                            e.preventDefault();
-                                            const finalCv = selectCv || cv;
-                                            if (!finalCv) {
-                                                setError("Trebuie să încarci un CV!");
-                                                return;
-                                            }
-                                             console.log(finalCv);
-                                        }}
+                                    <form className="apply-form"
+                                        onSubmit={handleChange}
                                     >
                                         <div className="apply-field">
                                             <label htmlFor="apply-name">Nume și Prenume</label>
@@ -186,7 +217,7 @@ function InternshipDetails(){
                                                 accept=".pdf,.doc,.docx"
                                                 className="apply-upload-input"
                                                 onChange={(e)=>{
-                                                    setSelectCv(e.target.files[0].name);
+                                                    setSelectCv(e.target.files[0]);
                                                 }
                                             }
                                             />
@@ -198,6 +229,10 @@ function InternshipDetails(){
                                                 id="apply-letter"
                                                 rows="4"
                                                 placeholder="Spune-ne de ce ești potrivit pentru acest internship"
+                                                value={application.coverLetter}
+                                                onChange={(e)=>{
+                                                    setApplication({...application,coverLetter:e.target.value});
+                                                }}
                                             />
                                         </div>
 
